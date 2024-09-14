@@ -22,7 +22,7 @@ function NavBar() {
         
         {/* Link to home page*/}
         <a className="flex items-center justify-center" href="/">
-          <span className="font-bold text-xl">Ravenda</span>
+          <span className="font-bold text-xl sm:text-3xl tracking-widest">Ravenda</span>
         </a>
 
         {/* Menu button for small screens. Hidden in large screens*/}
@@ -37,7 +37,7 @@ function NavBar() {
         <nav
         className={`
           ${isMenuOpen ? 'flex' : 'hidden' } 
-          flex-col sm:flex-row sm:flex sm:ml-auto gap-4 sm:gap-6 absolute sm:static top-14 left-0 sm:left-auto w-full sm:w-auto bg-white sm:bg-transparent shadow sm:shadow-none p-4 sm:p-0 items-center justify-center`}
+          flex-col sm:flex-row sm:flex sm:ml-auto gap-4 sm:gap-6 absolute sm:static top-14 left-0 sm:left-auto w-full sm:w-auto bg-white sm:bg-transparent shadow sm:shadow-none p-4 sm:p-0 items-center justify-center font-extrabold text-lg`}
 >
 
           <a

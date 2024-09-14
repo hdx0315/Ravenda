@@ -11,7 +11,7 @@ import HotDealsSection from '../sections/home/HotDealsSection'
 
 function Home() {
   return (
-    <div className=''>
+    <div className='font-main'>
       <NavBar/>
 
       <HeroSection/>
