@@ -26,7 +26,7 @@ function HeroSection() {
         </div>
               
         <div className="flex justify-center w-full">
-          <button className="m-4 px-6 py-3 text-black font-bold bg-secondary hover:bg-secondary-200 rounded-lg text-lg">
+          <button className="m-4 px-6 py-3 text-white font-bold bg-secondary_5 hover:bg-secondary-200 rounded-lg text-lg tracking-widest">
             Shop Now
           </button>
         </div>
