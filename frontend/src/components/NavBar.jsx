@@ -43,7 +43,7 @@ function NavBar() {
 >
 
           <a
-            className="font-medium hover:underline underline-offset-4"
+            className="text-lg font-semibold p-4 hover:text-primary hover:bg-black hover:rounded-lg transition-colors tracking-wider"
             href="/"
             onClick={() => setIsMenuOpen(false)}
           >
@@ -52,7 +52,7 @@ function NavBar() {
 
 
           <a
-            className="font-medium hover:underline underline-offset-4"
+            className="text-lg font-semibold p-4 hover:text-primary hover:bg-black hover:rounded-lg transition-colors tracking-wider"
             href="/collections"
             onClick={() => setIsMenuOpen(false)}
           >
@@ -61,7 +61,7 @@ function NavBar() {
 
 
           <a
-            className="font-medium hover:underline underline-offset-4"
+            className="text-lg font-semibold p-4 hover:text-primary hover:bg-black hover:rounded-lg transition-colors tracking-wider"
             href="/gallery"
             onClick={() => setIsMenuOpen(false)}
           >
