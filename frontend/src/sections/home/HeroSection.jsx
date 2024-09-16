@@ -7,7 +7,7 @@ import HeroImg from '../../assets/images/hero_top_1.jpg'
 function HeroSection() {
   return (
     <>
-      <div className="pt-16 sm:pt-24 h-svh  flex flex-col sm:flex-row  items-center justify-evenly px-4 sm:px-12 bg-gray-50 bg-gradient-to-r from-primary  to-90%">
+      <div className="pt-16 sm:pt-24 h-svh  flex flex-col sm:flex-row  items-center justify-evenly px-4 sm:px-12 bg-gradient-to-r from-primary  to-90%">
       
       <div className="text-left max-w-lg flex-col justify-center items-center">
         <div className="text-5xl sm:text-7xl font-bold font-main ">
