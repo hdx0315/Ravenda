@@ -27,7 +27,15 @@ function NewArrivalsSection() {
       </div>
       */}
 
-      <div className="flex my-8">
+      <div className="flex sm:hidden my-8">
+        <div className='flex flex-wrap gap-8 m-8 justify-center items-center'>
+          <Card />
+          <Card />
+          <Card />
+        </div>
+      </div>
+
+      <div className="hidden sm:flex  my-8">
         <div className='flex flex-wrap gap-8 m-8 justify-center items-center'>
           <Card />
           <Card />
