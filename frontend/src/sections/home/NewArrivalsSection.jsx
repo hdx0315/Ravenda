@@ -39,15 +39,12 @@ function NewArrivalsSection() {
         <div className='flex flex-wrap gap-8 m-8 justify-center items-center'>
           <Card />
           <Card />
-          <Card />
         </div>
         <div className='hidden md:flex flex-wrap gap-8 m-8  justify-center items-center'>
           <Card />
           <Card />
-          <Card />
         </div>
         <div className='hidden lg:flex flex-wrap gap-8 m-8  justify-center items-center'>
-          <Card />
           <Card />
           <Card />
         </div>

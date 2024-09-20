@@ -31,15 +31,12 @@ function HotDealsSection() {
         <div className='flex flex-wrap gap-8 m-8 justify-center items-center'>
           <Card />
           <Card />
-          <Card />
         </div>
         <div className='hidden md:flex flex-wrap gap-8 m-8  justify-center items-center'>
           <Card />
           <Card />
-          <Card />
         </div>
         <div className='hidden lg:flex flex-wrap gap-8 m-8  justify-center items-center'>
-          <Card />
           <Card />
           <Card />
         </div>
@@ -47,7 +44,7 @@ function HotDealsSection() {
 
       {/* Button Section */}
       <div className="flex justify-center items-center p-2">
-        <a href="/newArrivals">
+        <a href="/hotDeals">
           <button className="px-8 py-4 text-white font-bold bg-secondary_5 hover:bg-green-500 hover:text-black tracking-widest rounded-lg text-lg transition-transform transform hover:scale-105">
             See More
           </button>

@@ -42,7 +42,7 @@ function Collection() {
       <NavBar />
 
       {/* In-Page Navigation Links with Toggle for Small Screens */}
-      <div className="fixed top-20 left-0 w-full z-10 p-1">
+      <div className="fixed top-24 left-0 w-full z-10 p-1">
         {/* Menu button for small screens */}
         <button
           className="block sm:hidden text-2xl ml-auto p-2 "
@@ -72,12 +72,12 @@ function Collection() {
       </div>
 
       {/* Collection Sections */}
-      <div className="mt-32">
+      <div className="mt-32 border-2 border-red-500">
         {collectionSections.map((section, index) => (
           <div
             key={index}
             id={`section-${index}`} // Section ID for linking
-            className="flex flex-col my-16 justify-center items-center"
+            className="flex flex-col pt-28 justify-center items-center"
           >
             <div className="w-2/3 text-center my-8 flex flex-col justify-center items-center">
               <h3 className="text-3xl font-bold text-gray-800">{section.title}</h3>
@@ -86,11 +86,11 @@ function Collection() {
 
             {/* Cards Section */}
             <div className="flex justify-center">
-              <div className="flex flex-wrap gap-8 justify-center items-center p-8 ">
+              <div className="flex flex-wrap gap-8 justify-center items-center ">
                 <Card />
                 <Card />
               </div>
-              <div className="flex flex-wrap gap-8 justify-center items-center ">
+              <div className="flex flex-wrap gap-8 justify-center items-center">
                 <Card />
                 <Card />
               </div>

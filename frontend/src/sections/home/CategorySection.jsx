@@ -20,7 +20,7 @@ function CategorySection() {
       {/* Categories Section */}
       <div className='flex flex-wrap p-4 justify-center gap-8'>
         {/* Frocks */}
-        <a href='/collections' className='group p-2 mx-0 lg:mx-10 transform transition-all hover:scale-105'>
+        <a href='/collections#section-0' className='group p-2 mx-0 lg:mx-10 transform transition-all hover:scale-105'>
           <div className='flex items-center text-xl font-bold tracking-wide'>
             Frocks <FiArrowRight className='ml-2 text-lg' />
           </div>
@@ -28,7 +28,7 @@ function CategorySection() {
         </a>
 
         {/* Tops */}
-        <a href='/collections' className='group p-2 mx-0 lg:mx-10 transform transition-all hover:scale-105'>
+        <a href='/collections#section-1' className='group p-2 mx-0 lg:mx-10 transform transition-all hover:scale-105'>
           <div className='flex items-center text-xl font-bold tracking-wide'>
             Tops <FiArrowRight className='ml-2 text-lg' />
           </div>
@@ -36,7 +36,7 @@ function CategorySection() {
         </a>
 
         {/* Bottoms */}
-        <a href='/collections' className='group p-2 mx-0 lg:mx-10 transform transition-all hover:scale-105'>
+        <a href='/collections#section-2' className='group p-2 mx-0 lg:mx-10 transform transition-all hover:scale-105'>
           <div className='flex items-center text-xl font-bold tracking-wide'>
             Bottoms <FiArrowRight className='ml-2 text-lg' />
           </div>
@@ -46,7 +46,7 @@ function CategorySection() {
 
       {/* Browse Collections Button */}
       <div className="flex justify-center items-center py-8">
-        <a href="/newArrivals">
+        <a href="/collections">
           <button className="px-8 py-4 text-white font-bold bg-secondary_5 hover:bg-green-500 hover:text-black tracking-widest rounded-lg text-lg transition-transform transform hover:scale-105">
             Browse Collections
           </button>
