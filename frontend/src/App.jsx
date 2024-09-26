@@ -13,6 +13,7 @@ import Gallery from './pages/Gallery'
 
 import Login from './pages/Auth/Login'
 import SignUp from './pages/Auth/SignUp'
+import Admin from './pages/Admin/Admin'
 
 
 function App() {
@@ -31,6 +32,8 @@ function App() {
           
           <Route path='/auth/login' element={<Login/>}/>
           <Route path='/auth/signup' element={<SignUp/>}/>
+
+          <Route path='/admin' element={<Admin/>}/>
         </Routes>
       </Router>
     </>

@@ -1,3 +1,4 @@
+
 # Logs
 logs
 *.log
@@ -136,3 +137,8 @@ dist
 .yarn/install-state.gz
 .pnp.*
 /frontend/.vite
+
+
+/backend/node_modules
+backend/.env
+/frontend/node_modules
