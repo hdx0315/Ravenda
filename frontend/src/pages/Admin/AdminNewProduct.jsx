@@ -57,12 +57,15 @@ function AdminNewProduct() {
             sizes,
         };
 
-        const response = await fetch('http://localhost:3000/api/v1/admin/newProduct', 
-            {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+        console.log(data);
+
+        const token = localStorage.getItem('token'); // or wherever you store your token
+        const response = await fetch('http://localhost:3000/api/v1/admin/newProduct', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}` // Include the token here
+          },
             body: JSON.stringify(data),
         });
 

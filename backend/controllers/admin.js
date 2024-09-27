@@ -1,7 +1,4 @@
-
-
-// controllers/admin.js
-const {Admin} = require('../models/admin');
+const { Admin } = require('../models/admin');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
@@ -12,7 +9,6 @@ const loginAdmin = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-  
     const admin = await Admin.findOne({ email });
 
     if (!admin) {
@@ -34,7 +30,4 @@ const loginAdmin = async (req, res) => {
   }
 };
 
-
-
 module.exports = { loginAdmin };
-

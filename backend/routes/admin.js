@@ -1,14 +1,14 @@
-
-
 const express = require('express');
+const { loginAdmin } = require('../controllers/admin');
+const { createProduct } = require('../controllers/adminNewProduct');
+const { authenticate } = require('../middleware/auth');
+
 const router = express.Router();
 
-const { createProduct } = require('../controllers/AdminNewProduct');
-const { loginAdmin } = require('../controllers/admin');
-
-router.route('/newProduct').post(createProduct);
+// Route for admin login
 router.post('/login', loginAdmin);
 
+// Route for creating a new product (requires authentication)
+router.post('/newProduct', authenticate, createProduct);
+
 module.exports = router;
-
-

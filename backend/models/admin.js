@@ -1,5 +1,3 @@
-
-
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
@@ -29,11 +27,11 @@ const addProductSchema = new mongoose.Schema({
         default: false
     },
     colors: {
-        type: Array,
+        type: [String],
         default: []
     },
     sizes: {
-        type: Array,
+        type: [String],
         default: []
     }
 });
@@ -62,12 +60,6 @@ adminSchema.pre('save', async function (next) {
 });
 
 const Admin = mongoose.model('Admin', adminSchema);
-
 const Detail = mongoose.model('Detail', addProductSchema);
 
-
-
-module.exports = {Detail, Admin};
-
-
-
+module.exports = { Detail, Admin };

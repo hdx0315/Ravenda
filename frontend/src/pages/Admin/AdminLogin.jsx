@@ -9,26 +9,32 @@ const AdminLogin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
-
-    const response = await fetch("http://localhost:3000/api/v1/admin/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
-
-    const data = await response.json();
-
-    if (response.ok) {
-      // Store the JWT in local storage
-      localStorage.setItem("token", data.token);
-      // Redirect to admin dashboard or other route
-    } else {
-      setError(data.message || "Login failed");
+    try {
+      console.log(e.message);
+      console.log('login.....');
+      const response = await fetch('http://localhost:3000/api/v1/admin/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        localStorage.setItem('token', data.token); // Store the token
+        // Redirect to the admin dashboard
+        window.location.href = '/admin/dashboard'; // Change this according to your routing setup
+      } else {
+        console.error(data.message);
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error('Login failed', error);
     }
   };
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
