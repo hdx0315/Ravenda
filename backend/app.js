@@ -4,7 +4,9 @@ require('dotenv').config();
 require('express-async-errors');
 
 const express = require('express');
-const admin = require('./routes/admin');
+const adminRoutes = require('./routes/admin');
+const authenticate = require('./middleware/auth');
+
 const connectDB = require('./db/connect');
 const app = express();
 
@@ -16,9 +18,15 @@ app.use(cors({
 }));
 
 
+
 // Middleware
 app.use(express.json());
-app.use('/api/v1/', admin);
+app.use('/api/v1/admin/', adminRoutes);
+
+app.use('/api/v1/protected-route', authenticate, (req, res) => {
+    res.send('This is a protected route');
+  });
+  
 
 // Health Check
 app.get('/', (req, res) => {

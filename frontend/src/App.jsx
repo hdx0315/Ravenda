@@ -14,6 +14,9 @@ import Gallery from './pages/Gallery'
 import Login from './pages/Auth/Login'
 import SignUp from './pages/Auth/SignUp'
 import Admin from './pages/Admin/Admin'
+import AdminNewProduct from './pages/Admin/AdminNewProduct'
+import AdminLogin from './pages/Admin/AdminLogin'
+
 
 
 function App() {
@@ -34,6 +37,8 @@ function App() {
           <Route path='/auth/signup' element={<SignUp/>}/>
 
           <Route path='/admin' element={<Admin/>}/>
+          <Route path='/admin/newProduct' element={<AdminNewProduct/>}/>
+          <Route path='/admin/login' element={<AdminLogin/>}/>
         </Routes>
       </Router>
     </>
