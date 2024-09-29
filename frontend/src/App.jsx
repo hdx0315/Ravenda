@@ -1,4 +1,6 @@
 
+
+//  App.jsx
 import './App.css'
 
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
@@ -18,7 +20,9 @@ import Admin from './pages/Admin/Admin'
 import AdminNewProduct from './pages/Admin/AdminNewProduct'
 import AdminLogin from './pages/Admin/AdminLogin'
 import AdminDashboard from './pages/Admin/AdminDashboard'
+import AdminEdit from './pages/Admin/AdminEdit'
 import AdminEditItem from './pages/Admin/AdminEditItem'
+
 import ProtectedRoute from './components/ProtectedRoute';
 
 
@@ -66,10 +70,20 @@ function App() {
           path="/admin/editItem" 
           element={
             <ProtectedRoute>
+              <AdminEdit />
+            </ProtectedRoute>
+          } 
+        />
+
+        <Route 
+          path="/admin/editItem/:id" 
+          element={
+            <ProtectedRoute>
               <AdminEditItem />
             </ProtectedRoute>
           } 
         />
+
 
         </Routes>
       </Router>

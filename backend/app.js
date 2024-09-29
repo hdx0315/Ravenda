@@ -13,7 +13,7 @@ const cors = require('cors');
 // Allow CORS from your frontend application
 app.use(cors({
     origin: 'http://localhost:5173', // Change this to your frontend URL if needed
-    methods: 'GET,POST',
+    methods: 'GET,POST, PUT, DELETE',
     allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
