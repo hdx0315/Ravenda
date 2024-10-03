@@ -1,4 +1,5 @@
 
+
 // backend/app.js
 require('dotenv').config();
 require('express-async-errors');
@@ -47,4 +48,7 @@ const start = async () => {
 
 start();
 
+
+
+console.log('RAVENDA')
 
