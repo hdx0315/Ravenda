@@ -1,4 +1,6 @@
 
+
+//  App.jsx
 import './App.css'
 
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
@@ -13,7 +15,15 @@ import Gallery from './pages/Gallery'
 
 import Login from './pages/Auth/Login'
 import SignUp from './pages/Auth/SignUp'
+
 import Admin from './pages/Admin/Admin'
+import AdminNewProduct from './pages/Admin/AdminNewProduct'
+import AdminLogin from './pages/Admin/AdminLogin'
+import AdminDashboard from './pages/Admin/AdminDashboard'
+import AdminEdit from './pages/Admin/AdminEdit'
+import AdminEditItem from './pages/Admin/AdminEditItem'
+
+import ProtectedRoute from './components/ProtectedRoute';
 
 
 function App() {
@@ -34,6 +44,47 @@ function App() {
           <Route path='/auth/signup' element={<SignUp/>}/>
 
           <Route path='/admin' element={<Admin/>}/>
+          
+
+        {/* Admin Login */}
+        <Route path="/admin/login" element={<AdminLogin />} />
+        
+        {/* Protected Admin Routes */}
+        <Route 
+          path="/admin/dashboard" 
+          element={
+            <ProtectedRoute>
+              <AdminDashboard />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/admin/newProduct" 
+          element={
+            <ProtectedRoute>
+              <AdminNewProduct />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/admin/editItem" 
+          element={
+            <ProtectedRoute>
+              <AdminEdit />
+            </ProtectedRoute>
+          } 
+        />
+
+        <Route 
+          path="/admin/editItem/:id" 
+          element={
+            <ProtectedRoute>
+              <AdminEditItem />
+            </ProtectedRoute>
+          } 
+        />
+
+
         </Routes>
       </Router>
     </>
@@ -41,3 +92,15 @@ function App() {
 }
 
 export default App
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

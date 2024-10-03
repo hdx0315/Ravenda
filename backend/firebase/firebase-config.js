@@ -1,28 +1,39 @@
+
+
+// backend/firebase/firebase-config.js
+// Import the functions you need from the SDKs you need
+
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getStorage } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+
 
 require('dotenv').config()
+
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
 const firebaseConfig = {
-  apiKey: process.env.API_KEY,
-  authDomain: "ravenda-v1.firebaseapp.com",
-  projectId: "ravenda-v1",
-  storageBucket: "ravenda-v1.appspot.com",
-  messagingSenderId: "557856776851",
-  appId: process.env.APP_ID,
-  measurementId: "G-LBSJ7WRDGC",
+    apiKey: import.meta.env.VITE_API_KEY,
+    authDomain: "ravenda-test-hdxas.firebaseapp.com",
+    projectId: "ravenda-test-hdxas",
+    storageBucket: "ravenda-test-hdxas.appspot.com",
+    messagingSenderId: "1054527040105",
+    appId: import.meta.env.VITE_APP_ID
 
 
-  storageBucket: 'images/'
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+
+
+
+const imageDB = getStorage(app);
+
+export { imageDB, getStorage, ref, uploadBytes, getDownloadURL, uploadBytesResumable };
+
+
