@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AdminNavbar from '../../components/Admin/AdminNavbar';
 
 const AdminEdit = () => {
     const navigate = useNavigate();
@@ -77,6 +78,7 @@ const AdminEdit = () => {
 
     return (
         <div className="container mx-auto mt-10">
+            <AdminNavbar/>
             <h1 className="text-2xl font-bold mb-4">Edit Products</h1>
             <table className="min-w-full bg-white">
                 <thead>
@@ -120,13 +122,13 @@ const AdminEdit = () => {
                                 </td>
                                 <td className="border p-2 ">
                                     <button
-                                        className="mb-2 bg-blue-500 text-white font-bold py-1 px-4 rounded hover:bg-blue-600"
+                                        className="mb-2 bg-lime-400 text-black font-bold py-1 px-4 rounded hover:bg-lime-500 w-24"
                                         onClick={() => handleEditClicks(product._id)}
                                     >
                                         Edit
                                     </button>
                                     <button
-                                        className="bg-red-500 text-white font-bold py-1 px-4 rounded hover:bg-red-600"
+                                        className="bg-rose-500 text-white font-bold py-1 px-4 rounded hover:bg-red-600 w-24"
                                         onClick={() => handleDeleteClick(product._id)}
                                     >
                                         Delete

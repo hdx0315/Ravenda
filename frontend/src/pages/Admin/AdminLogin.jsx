@@ -12,8 +12,6 @@ const AdminLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(e.message);
-      console.log('login.....');
       const response = await fetch('http://localhost:3000/api/v1/admin/login', {
         method: 'POST',
         headers: {
@@ -36,7 +34,6 @@ const AdminLogin = () => {
       console.error('Login failed', error);
     }
   };
-  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
@@ -76,3 +73,6 @@ const AdminLogin = () => {
 };
 
 export default AdminLogin;
+
+
+

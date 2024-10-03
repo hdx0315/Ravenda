@@ -6,6 +6,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 //import { } from 'firebase/storage';
 import { imageDB, getStorage, ref, uploadBytesResumable, getDownloadURL  } from '../../../../backend/firebase/firebase-config';
+import AdminNavbar from '../../components/Admin/AdminNavbar';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -137,6 +138,8 @@ function AdminEditItem() {
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-6">
+        <AdminNavbar/>
+        
             <div className="bg-white shadow-lg rounded-lg p-6 max-w-lg w-full">
                 <h2 className="text-2xl font-semibold text-center text-gray-700 mb-6">Admin Edit Product</h2>
 

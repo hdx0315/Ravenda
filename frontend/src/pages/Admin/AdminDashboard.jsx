@@ -16,23 +16,53 @@ const Dashboard = () => {
     navigate('/admin/editItem');
   };
 
+
+  const handleLogout = async () => {
+    const confirmed = window.confirm('Are you sure you want to logout?');
+        if (!confirmed) return;
+
+    
+    try {
+      // Optionally call the backend logout route
+      await fetch('http://localhost:3000/api/v1/admin/logout', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+
+      // Clear the token from local storage
+      localStorage.removeItem('token');
+
+      // Redirect to the login page
+      navigate('/admin/login'); // Redirect using React Router
+    } catch (error) {
+      console.error('Logout failed', error);
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
       <div className="bg-white shadow-md rounded-lg p-8 max-w-lg w-full">
-        <h1 className="text-2xl font-semibold text-gray-700 mb-6">Admin Dashboard</h1>
-        <div className="space-y-4">
+        <h1 className="text-2xl font-semibold text-black mb-6">Admin Dashboard</h1>
+        <div className="space-y-4 flex flex-col justify-center items-center">
           <button
             onClick={handleAddProduct}
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300"
+            className="w-72 bg-sky-300 text- py-2 px-4 rounded-lg hover:bg-sky-500  hover:text-white transition duration-300"
           >
             Add a New Product
           </button>
           <button
             onClick={handleEditItem}
-            className="w-full bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition duration-300"
+            className="w-72 bg-emerald-400 text- py-2 px-4 rounded-lg hover:bg-emerald-600  hover:text-white transition duration-300"
           >
             Edit Item
           </button>
+
+      <button onClick={handleLogout} className="w-72 bg-rose-400 text- py-2 px-4 rounded-lg hover:bg-red-600 hover:text-white transition duration-300"
+      >
+        Logout
+      </button>
         </div>
       </div>
     </div>

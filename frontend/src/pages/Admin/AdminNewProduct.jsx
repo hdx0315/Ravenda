@@ -5,6 +5,7 @@
 import React, { useState } from 'react';
 //import {  } from 'firebase/storage';
 import { imageDB, getStorage, ref, uploadBytesResumable, getDownloadURL } from '../../../../backend/firebase/firebase-config';
+import AdminNavbar from '../../components/Admin/AdminNavbar';
 
 
 function AdminNewProduct() {
@@ -91,6 +92,8 @@ function AdminNewProduct() {
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-6">
+        <AdminNavbar/>
+        
             <div className="bg-white shadow-lg rounded-lg p-6 max-w-lg w-full">
                 <h2 className="text-2xl font-semibold text-center text-gray-700 mb-6">Admin Upload</h2>
 

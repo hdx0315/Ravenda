@@ -18,6 +18,7 @@ const authenticate = (req, res, next) => {
   }
 };
 
+
 // Middleware to verify token
 const verifyToken = (req, res, next) => {
   const token = req.headers['authorization']?.split(' ')[1];
