@@ -3,8 +3,8 @@
 // AdminNewProduct.jsx
 
 import React, { useState } from 'react';
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import { imageDB } from '../../../../backend/firebase/firebase-config';
+//import {  } from 'firebase/storage';
+import { imageDB, getStorage, ref, uploadBytesResumable, getDownloadURL } from '../../../../backend/firebase/firebase-config';
 
 
 function AdminNewProduct() {
@@ -24,7 +24,7 @@ function AdminNewProduct() {
         const file = e.target.files[0];
         if (file) {
             setSelectedImg(file);
-            const imageRef = ref(imageDB, `images/${file.name}`);
+            const imageRef = ref(imageDB, `${file.name}`);
             const uploadTask = uploadBytesResumable(imageRef, file);
 
             uploadTask.on('state_changed', 
@@ -204,14 +204,10 @@ function AdminNewProduct() {
 
                 {/* Upload Progress Bar */}
                 {uploading && (
-                    <div className="w-full bg-gray-200 rounded-full h-4 mb-4">
-                        <div
-                            className="bg-green-500 h-4 rounded-full"
-                            style={{ width: `${progress}%` }}
-                        >
-                            <span className="text-white font-semibold text-center" style={{ display: 'block', width: '100%' }}>
-                                {progress}%
-                            </span>
+                    <div className="mb-4">
+                        <p className="text-lg text-gray-700 mb-2">Uploading: {progress}%</p>
+                        <div className="w-full bg-gray-200 rounded-full">
+                            <div className="bg-primary h-2 rounded-full" style={{ width: `${progress}%` }}></div>
                         </div>
                     </div>
                 )}

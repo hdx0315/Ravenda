@@ -1,25 +1,30 @@
 
+// backend/firebase/firebase-config.js
+// Import the functions you need from the SDKs you need
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytes, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
 
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_API_KEY,
-    authDomain: "ravenda-test-2.firebaseapp.com",
-    projectId: "ravenda-test-2",
-    storageBucket: "ravenda-test-2.appspot.com",
-    messagingSenderId: "264589480324",
+    authDomain: "ravenda-test-hdxas.firebaseapp.com",
+    projectId: "ravenda-test-hdxas",
+    storageBucket: "ravenda-test-hdxas.appspot.com",
+    messagingSenderId: "1054527040105",
     appId: import.meta.env.VITE_APP_ID
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-const imageDB = getStorage(app);
-const detailsDB = getFirestore(app);
 
-export { imageDB, detailsDB, ref, uploadBytes, getDownloadURL, collection, addDoc, uploadBytesResumable };
+const imageDB = getStorage(app);
+
+export { imageDB, getStorage, ref, uploadBytes, getDownloadURL, uploadBytesResumable };
 
 

@@ -1,4 +1,6 @@
-// src/pages/admin/AdminLogin.jsx
+
+
+// frontend/src/pages/admin/AdminLogin.jsx
 
 import React, { useState } from "react";
 

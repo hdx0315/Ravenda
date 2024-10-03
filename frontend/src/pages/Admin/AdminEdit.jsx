@@ -1,7 +1,3 @@
-
-
-// AdminEditItem.jsx
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -22,6 +18,11 @@ const AdminEdit = () => {
                         Authorization: `Bearer ${token}`,
                     },
                 });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to fetch products');
+                }
+
                 const data = await response.json();
                 console.log('Fetched products:', data);
                 
@@ -31,7 +32,7 @@ const AdminEdit = () => {
                     setProducts([]);
                 }
             } catch (error) {
-                setError('Failed to fetch products');
+                setError(error.message || 'Failed to fetch products');
                 console.error('Error fetching products:', error);
             } finally {
                 setLoading(false);
@@ -45,8 +46,34 @@ const AdminEdit = () => {
         navigate(`/admin/editItem/${productId}`);
     };
 
+    const handleDeleteClick = async (productId) => {
+        const confirmed = window.confirm('Are you sure you want to delete this product?');
+        if (!confirmed) return;
+
+        try {
+            const token = localStorage.getItem('token');
+            const response = await fetch(`http://localhost:3000/api/v1/admin/editItem/${productId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to delete the product');
+            }
+
+            // Refresh the product list after deletion
+            setProducts((prevProducts) => prevProducts.filter(product => product._id !== productId));
+        } catch (error) {
+            setError(error.message || 'Failed to delete product');
+            console.error('Error deleting product:', error);
+        }
+    };
+
     if (loading) return <div>Loading...</div>;
-    if (error) return <div>{error}</div>;
+    if (error) return <div className="text-red-500">{error}</div>;
 
     return (
         <div className="container mx-auto mt-10">
@@ -91,12 +118,18 @@ const AdminEdit = () => {
                                 <td className="border p-2">
                                     {product.sizes.join(', ')}
                                 </td>
-                                <td className="border p-2">
+                                <td className="border p-2 ">
                                     <button
-                                        className="bg-blue-500 text-white font-bold py-1 px-4 rounded hover:bg-blue-600"
-                                        onClick={() => handleEditClicks(product._id)} // Pass the product ID
+                                        className="mb-2 bg-blue-500 text-white font-bold py-1 px-4 rounded hover:bg-blue-600"
+                                        onClick={() => handleEditClicks(product._id)}
                                     >
                                         Edit
+                                    </button>
+                                    <button
+                                        className="bg-red-500 text-white font-bold py-1 px-4 rounded hover:bg-red-600"
+                                        onClick={() => handleDeleteClick(product._id)}
+                                    >
+                                        Delete
                                     </button>
                                 </td>
                             </tr>

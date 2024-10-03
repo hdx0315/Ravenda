@@ -1,3 +1,6 @@
+
+
+// backend/controllers/adminNewProduct.js
 const { Detail } = require('../models/admin');
 
 const createProduct = async (req, res) => {

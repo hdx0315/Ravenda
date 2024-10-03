@@ -1,11 +1,11 @@
 
 
-// AdminEditItem.jsx
+// frontend/src/pages/admin/AdminEditItem.jsx
 
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import { imageDB } from '../../../../backend/firebase/firebase-config';
+//import { } from 'firebase/storage';
+import { imageDB, getStorage, ref, uploadBytesResumable, getDownloadURL  } from '../../../../backend/firebase/firebase-config';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -71,7 +71,7 @@ function AdminEditItem() {
         const file = e.target.files[0];
         if (file) {
             setSelectedImg(file);
-            const imageRef = ref(imageDB, `images/${file.name}`);
+            const imageRef = ref(imageDB, `${file.name}`);
             const uploadTask = uploadBytesResumable(imageRef, file);
 
             uploadTask.on('state_changed', 
@@ -95,6 +95,12 @@ function AdminEditItem() {
     };
 
     const handleUpdate = async () => {
+        // Simple validations
+        if (!txt || !price || !category) {
+            alert("Please fill in all required fields.");
+            return;
+        }
+    
         const data = {
             title: txt,
             image: imgURL,
@@ -107,25 +113,26 @@ function AdminEditItem() {
         };
     
         const token = localStorage.getItem('token'); 
-        const response = await fetch(`http://localhost:3000/api/v1/admin/editItem/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}` 
-            },
-            body: JSON.stringify(data),
-        });
+        try {
+            const response = await fetch(`http://localhost:3000/api/v1/admin/editItem/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}` 
+                },
+                body: JSON.stringify(data),
+            });
     
-        const responseData = await response.json(); // Log the response data for debugging
+            if (!response.ok) throw new Error(`Error: ${response.statusText}`);
     
-        if (response.ok) {
             alert('Successfully updated!'); 
             navigate('/admin/editItem');
-        } else {
+        } catch (error) {
             alert("Failed to update data");
-            console.log("Failed to update data:", responseData);
+            console.error("Failed to update data:", error);
         }
     };
+    
     
 
     return (

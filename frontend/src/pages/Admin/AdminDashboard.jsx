@@ -1,7 +1,7 @@
 
 
-// src/pages/admin/Dashboard.jsx
-// src/pages/admin/Dashboard.jsx
+// frontend/src/pages/admin/Dashboard.jsx
+
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 

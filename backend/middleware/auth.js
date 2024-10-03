@@ -1,3 +1,5 @@
+
+//  backend/middleware/auth.js
 const jwt = require('jsonwebtoken');
 
 // Middleware to authenticate admin

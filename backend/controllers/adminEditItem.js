@@ -1,6 +1,6 @@
 
 
-// controllers/adminEditItem.js
+// backend/controllers/adminEditItem.js
 
 const { Detail } = require('../models/admin');
 
@@ -54,6 +54,24 @@ const updateProductByID = async (req, res) => {
     }
 };
 
+const deleteProductByID = async (req, res) => {
+    const { id } = req.params;
 
+    console.log('delete product');
 
-module.exports = { getProducts, updateProductByID ,getProductByID};
+    try {
+        const deletedProduct = await Detail.findByIdAndDelete(id);
+    
+        if (!deletedProduct) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+
+        res.status(200).json({ message: 'Product deleted successfully' });
+    }
+    catch (error) {
+        console.error('Error deleting product:', error);
+        res.status(500).json({ message: 'Error deleting product', error });
+    }
+}
+
+module.exports = { getProducts, updateProductByID ,getProductByID, deleteProductByID};

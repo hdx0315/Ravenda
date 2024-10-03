@@ -1,5 +1,5 @@
 
-//models/admin.js
+// backend/models/admin.js
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
