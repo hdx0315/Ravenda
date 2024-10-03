@@ -23,7 +23,7 @@ const Dashboard = () => {
 
     
     try {
-      // Optionally call the backend logout route
+      
       await fetch('http://localhost:3000/api/v1/admin/logout', {
         method: 'POST',
         headers: {
@@ -35,7 +35,7 @@ const Dashboard = () => {
       localStorage.removeItem('token');
 
       // Redirect to the login page
-      navigate('/admin/login'); // Redirect using React Router
+      navigate('/admin/login');
     } catch (error) {
       console.error('Logout failed', error);
     }
@@ -43,8 +43,13 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+
       <div className="bg-white shadow-md rounded-lg p-8 max-w-lg w-full">
-        <h1 className="text-2xl font-semibold text-black mb-6">Admin Dashboard</h1>
+
+        <h1 className="text-2xl font-semibold text-black mb-6">
+          Admin Dashboard
+        </h1>
+
         <div className="space-y-4 flex flex-col justify-center items-center">
           <button
             onClick={handleAddProduct}
@@ -52,6 +57,7 @@ const Dashboard = () => {
           >
             Add a New Product
           </button>
+
           <button
             onClick={handleEditItem}
             className="w-72 bg-emerald-400 text- py-2 px-4 rounded-lg hover:bg-emerald-600  hover:text-white transition duration-300"
@@ -59,10 +65,11 @@ const Dashboard = () => {
             Edit Item
           </button>
 
-      <button onClick={handleLogout} className="w-72 bg-rose-400 text- py-2 px-4 rounded-lg hover:bg-red-600 hover:text-white transition duration-300"
-      >
-        Logout
-      </button>
+          <button onClick={handleLogout} className="w-72 bg-rose-400 text- py-2 px-4 rounded-lg hover:bg-red-600 hover:text-white transition duration-300"
+          >
+            Logout
+          </button>
+          
         </div>
       </div>
     </div>

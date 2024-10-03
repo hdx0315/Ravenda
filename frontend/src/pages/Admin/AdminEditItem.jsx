@@ -4,7 +4,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-//import { } from 'firebase/storage';
 import { imageDB, getStorage, ref, uploadBytesResumable, getDownloadURL  } from '../../../../backend/firebase/firebase-config';
 import AdminNavbar from '../../components/Admin/AdminNavbar';
 
@@ -29,27 +28,23 @@ function AdminEditItem() {
     // Fetch existing product data based on the id
     useEffect(() => {
         const fetchProductData = async () => {
-
             
-        const token = localStorage.getItem('token');
-        const response = await fetch(`http://localhost:3000/api/v1/admin/editItem/${id}`, { // Update to your API endpoint
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}` 
-            },
-           // body: JSON.stringify(data),
-        });
-
-            // Update to your API endpoint
-
+            const token = localStorage.getItem('token');
+            const response = await fetch(`http://localhost:3000/api/v1/admin/editItem/${id}`, { 
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}` 
+                },
+            // body: JSON.stringify(data),
+            });
 
             if (!response.ok) {
                 console.log(response)
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-    
-            
+        
+                
             const product = await response.json();
 
             console.log('Fetched product:', product);
@@ -70,6 +65,7 @@ function AdminEditItem() {
 
     const handleImageSelection = (e) => {
         const file = e.target.files[0];
+
         if (file) {
             setSelectedImg(file);
             const imageRef = ref(imageDB, `${file.name}`);
@@ -96,7 +92,7 @@ function AdminEditItem() {
     };
 
     const handleUpdate = async () => {
-        // Simple validations
+        
         if (!txt || !price || !category) {
             alert("Please fill in all required fields.");
             return;
@@ -128,6 +124,7 @@ function AdminEditItem() {
     
             alert('Successfully updated!'); 
             navigate('/admin/editItem');
+
         } catch (error) {
             alert("Failed to update data");
             console.error("Failed to update data:", error);
@@ -138,14 +135,16 @@ function AdminEditItem() {
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-6">
-        <AdminNavbar/>
+
+            <AdminNavbar/>
         
             <div className="bg-white shadow-lg rounded-lg p-6 max-w-lg w-full">
                 <h2 className="text-2xl font-semibold text-center text-gray-700 mb-6">Admin Edit Product</h2>
 
                 {/* Text Input */}
                 <div className="mb-4">
-                    <label htmlFor="text-input" className="block text-lg font-medium text-gray-700 mb-2">Enter Text</label>
+                    
+                    <label htmlFor="text-input" className="block text-lg font-medium text-gray-700 mb-2">Product Title</label>
                     <input
                         type="text"
                         id="text-input"

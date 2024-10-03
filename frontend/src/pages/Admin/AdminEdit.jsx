@@ -78,8 +78,13 @@ const AdminEdit = () => {
 
     return (
         <div className="container mx-auto mt-10">
+
             <AdminNavbar/>
-            <h1 className="text-2xl font-bold mb-4">Edit Products</h1>
+
+            <h1 className="text-2xl font-bold mb-4">
+                Edit Products
+            </h1>
+
             <table className="min-w-full bg-white">
                 <thead>
                     <tr>
@@ -94,6 +99,7 @@ const AdminEdit = () => {
                         <th className="border p-2">Action</th>
                     </tr>
                 </thead>
+
                 <tbody>
                     {Array.isArray(products) && products.length > 0 ? (
                         products.map((product) => (
@@ -120,6 +126,7 @@ const AdminEdit = () => {
                                 <td className="border p-2">
                                     {product.sizes.join(', ')}
                                 </td>
+
                                 <td className="border p-2 ">
                                     <button
                                         className="mb-2 bg-lime-400 text-black font-bold py-1 px-4 rounded hover:bg-lime-500 w-24"
@@ -127,6 +134,7 @@ const AdminEdit = () => {
                                     >
                                         Edit
                                     </button>
+                                    
                                     <button
                                         className="bg-rose-500 text-white font-bold py-1 px-4 rounded hover:bg-red-600 w-24"
                                         onClick={() => handleDeleteClick(product._id)}

@@ -4,15 +4,15 @@ require('dotenv').config();
 require('express-async-errors');
 const express = require('express');
 const adminRoutes = require('./routes/admin');
-const { authenticate } = require('./middleware/auth');  // Destructure to access authenticate
+const { authenticate } = require('./middleware/auth');  
 
 const connectDB = require('./db/connect');
 const app = express();
 const cors = require('cors');
 
-// Allow CORS from your frontend application
+// Allow CORS from frontend application
 app.use(cors({
-    origin: 'http://localhost:5173', // Change this to your frontend URL if needed
+    origin: 'http://localhost:5173',
     methods: 'GET,POST, PUT, DELETE',
     allowedHeaders: ['Content-Type', 'Authorization'],
 }));
@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/v1/admin/', adminRoutes);
 
-// Example of a protected route
+// protected route
 app.use('/api/v1/protected-route', authenticate, (req, res) => {
   res.send('This is a protected route');
 });

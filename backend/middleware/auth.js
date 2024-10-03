@@ -36,5 +36,5 @@ const verifyToken = (req, res, next) => {
   });
 };
 
-// Correct export statement
+
 module.exports = { authenticate, verifyToken };
