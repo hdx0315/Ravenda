@@ -39,7 +39,7 @@ function NavBar() {
         <nav
           className={`
             ${isMenuOpen ? 'flex' : 'hidden'}
-            flex-col sm:flex-row sm:flex sm:ml-auto gap-4 sm:gap-6 absolute sm:static top-14 left-0 sm:left-auto w-full sm:w-auto shadow-none p-4 sm:p-0 items-end pr-8 justify-center font-extrabold text-lg bg-gradient-to-bl
+            flex-col sm:flex-row sm:flex sm:ml-auto gap-4 sm:gap-6 absolute sm:static top-14 left-0 sm:left-auto w-full sm:w-auto shadow-none p-4 sm:p-0 items-end pr-8 justify-center font-extrabold text-lg 
           `}
         >
           <a
