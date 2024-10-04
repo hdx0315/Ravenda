@@ -1,5 +1,7 @@
 import React from 'react'
 import Card from '../../components/Card';
+import i2 from '../../assets/logo/logo_2.jpg'
+import { images } from '../../assets/images/assets-images';
 
 function HotDealsSection() {
   return (
@@ -15,32 +17,71 @@ function HotDealsSection() {
         </p>
       </div>
 
-      {/* Cards Section
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-        <Card />
-        <Card />
-        <Card />
-        {/* Extra Cards only visible on medium+ screens }
-        <Card className="hidden lg:block" />
-        <Card className="hidden lg:block" />
-        <Card className="hidden lg:block" />
-      </div>
-      */}
 
-      <div className="flex my-8">
+      
+      <div className="flex sm:hidden my-8">
         <div className='flex flex-wrap gap-8 m-8 justify-center items-center'>
-          <Card />
-          <Card />
+          <Card 
+            title='Frock 04'
+            img={images.f4}
+            description='frock 4'
+            price='1500'
+          />
+          <Card 
+            title='Top 3'
+            img={images.t3}
+            description='top 3'
+            price='3050'
+          />
+        </div>
+      </div>
+
+      <div className="hidden sm:flex  my-8">
+        <div className='flex flex-wrap gap-8 m-8 justify-center items-center'>
+          <Card 
+            title='Frock 04'
+            img={images.f4}
+            description='frock 4'
+            price='1500'
+          />
+          <Card 
+            title='Top 3'
+            img={images.t3}
+            description='top 3'
+            price='3050'
+          />
         </div>
         <div className='hidden md:flex flex-wrap gap-8 m-8  justify-center items-center'>
-          <Card />
-          <Card />
+          <Card 
+            title='Top 1'
+            img={images.t1}
+            description='top 1'
+            price='150'
+          />
+          <Card 
+            title='Bottom 2'
+            img={images.b2}
+            description='Bottom 2'
+            price='150'
+          />
         </div>
         <div className='hidden lg:flex flex-wrap gap-8 m-8  justify-center items-center'>
-          <Card />
-          <Card />
+
+          <Card 
+            title='Bottom 1'
+            img={images.b1}
+            description='Bottom 1'
+            price='1000'
+          />
+          <Card 
+            title='Frock 2'
+            img={images.f2}
+            description='frock 2'
+            price='1500'
+          />
         </div>
       </div>
+
 
       {/* Button Section */}
       <div className="flex justify-center items-center p-2">
