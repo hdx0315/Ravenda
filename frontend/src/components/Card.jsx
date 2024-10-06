@@ -1,5 +1,8 @@
+
+//  frontend/src/components/Card.jsx
+
+
 import React from 'react';
-import l2 from '../assets/logo/logo_2.jpg'
 
 function Card(props) {
   return (
