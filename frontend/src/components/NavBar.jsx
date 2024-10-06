@@ -60,10 +60,10 @@ function NavBar() {
 
           <a
             className="text-lg font-semibold p-4 hover:text-primary hover:bg-black hover:rounded-lg transition-colors tracking-wider"
-            href="/newArrivals"
+            href="/cart"
             onClick={() => setIsMenuOpen(false)}
           >
-            New Arrivals
+            Cart
           </a>
 
           {/* Profile Menu */}
