@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Card from '../components/Card';
 import NavBar from '../components/NavBar';
+import { Link } from 'react-router-dom';
 
 function NewArrivals() {
   const [newProducts, setNewProducts] = useState([]);
@@ -60,6 +61,8 @@ function NewArrivals() {
       <div className="flex items-center justify-center">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 m-8 justify-items-center">
           {newProducts.map((product) => (
+            <Link className='flex justify-center' key={product._id} to={`/product/${product._id}`}>
+              
             <Card
               key={product._id}
               img={product.image}
@@ -67,6 +70,7 @@ function NewArrivals() {
               description={product.category}
               price={`$${product.price}`}
             />
+            </Link>
           ))}
         </div>
       </div>

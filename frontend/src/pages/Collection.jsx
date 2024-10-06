@@ -1,11 +1,16 @@
+// frontend/src/pages/Collection.jsx
+
 import React, { useState, useEffect } from 'react';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import Card from '../components/Card';
 import { FiMenu } from 'react-icons/fi'; // Import the menu icon
+import { Link } from 'react-router-dom';
 
 function Collection() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [products, setProducts] = useState([]);
+  const [error, setError] = useState(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -13,29 +18,50 @@ function Collection() {
 
   useEffect(() => {
     document.title = 'Collections | Ravenda';
+    fetchProducts(); // Fetch products when the component mounts
+
     return () => {
       document.title = 'Ravenda';
     };
   }, []);
 
-  const collectionSections = [
-    {
-      title: 'Frocks',
-      description: 'Discover our latest frock designs for every occasion.',
-    },
-    {
-      title: 'Tops',
-      description: 'Explore stylish tops to elevate your casual or formal look.',
-    },
-    {
-      title: 'Bottoms',
-      description: 'Find the perfect pair of bottoms to complete your wardrobe.',
-    },
-    {
-      title: 'Office Wear',
-      description: 'Professional office wear that blends style with comfort.',
-    },
-  ];
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/api/v1/productRoutes/getAllProducts', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch products');
+      }
+
+      const allProducts = await response.json();
+      setProducts(allProducts);
+    } catch (error) {
+      setError(error.message || 'Failed to fetch products');
+      console.error('Error fetching products:', error);
+    }
+  };
+
+  // Group products by category
+  const groupedProducts = products.reduce((acc, product) => {
+    const category = product.category || 'Others'; // Default to 'Others' if category is not defined
+    if (!acc[category]) {
+      acc[category] = [];
+    }
+    acc[category].push(product);
+    return acc;
+  }, {});
+
+  // Extract sections from groupedProducts
+  const collectionSections = Object.entries(groupedProducts).map(([title, products]) => ({
+    title,
+    description: `Explore our collection of ${title.toLowerCase()}.`,
+    products,
+  }));
 
   return (
     <div className="font-main m-0 p-0">
@@ -44,10 +70,7 @@ function Collection() {
       {/* In-Page Navigation Links with Toggle for Small Screens */}
       <div className="fixed top-24 left-0 w-full z-10 p-1">
         {/* Menu button for small screens */}
-        <button
-          className="block sm:hidden text-2xl ml-auto p-2 "
-          onClick={toggleMenu}
-        >
+        <button className="block sm:hidden text-2xl ml-auto p-2" onClick={toggleMenu}>
           Collections
         </button>
 
@@ -72,12 +95,14 @@ function Collection() {
       </div>
 
       {/* Collection Sections */}
-      <div className="mt-32 border-2 border-red-500">
+      <div className="mt-28 ">
+        {error && <p className="text-red-500 text-center">{error}</p>}
+
         {collectionSections.map((section, index) => (
           <div
             key={index}
             id={`section-${index}`} // Section ID for linking
-            className="flex flex-col pt-28 justify-center items-center"
+            className="flex flex-col pt-16 justify-center items-center"
           >
             <div className="w-2/3 text-center my-8 flex flex-col justify-center items-center">
               <h3 className="text-3xl font-bold text-gray-800">{section.title}</h3>
@@ -85,21 +110,21 @@ function Collection() {
             </div>
 
             {/* Cards Section */}
-            <div className="flex justify-center">
-              <div className="flex flex-wrap gap-8 justify-center items-center ">
-                <Card />
-                <Card />
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 w-fit px-4 justify-items-center">
+                {section.products.map((product) => (
+                  <Link  className='flex justify-center' key={product._id} to={`/product/${product._id}`}>
+                    <Card
+                      img={product.image}
+                      title={product.title}
+                      description={product.category}
+                      price={`$${product.price}`}
+                    />
+                  </Link>
+                
+                ))}
               </div>
-              <div className="flex flex-wrap gap-8 justify-center items-center">
-                <Card />
-                <Card />
-              </div>
-              <div className="flex flex-wrap gap-8 justify-center items-center">
-                <Card />
-                <Card />
-              </div>
+              
             </div>
-          </div>
         ))}
       </div>
 
