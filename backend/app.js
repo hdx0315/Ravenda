@@ -4,7 +4,10 @@
 require('dotenv').config();
 require('express-async-errors');
 const express = require('express');
+
 const adminRoutes = require('./routes/admin');
+const productRoutes = require('./routes/productRoutes');
+
 const { authenticate } = require('./middleware/auth');  
 
 const connectDB = require('./db/connect');
@@ -22,7 +25,10 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
 app.use('/api/v1/admin/', adminRoutes);
+
+app.use('/api/v1/productRoutes',productRoutes);
 
 // protected route
 app.use('/api/v1/protected-route', authenticate, (req, res) => {
