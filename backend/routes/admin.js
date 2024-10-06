@@ -8,9 +8,17 @@ const { loginAdmin } = require('../controllers/admin');
 const { createProduct } = require('../controllers/adminNewProduct');
 const { authenticate } = require('../middleware/auth');
 
-const { getProducts, updateProductByID, getProductByID, deleteProductByID} = require('../controllers/adminEditItem')
+const { 
+    getProducts, 
+    updateProductByID, 
+    getProductByID, 
+    deleteProductByID
+} = require('../controllers/adminEditItem')
 
 const router = express.Router();
+
+
+// routes
 
 // Route for admin login
 router.post('/login', loginAdmin);
