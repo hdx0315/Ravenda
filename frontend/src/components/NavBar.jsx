@@ -21,7 +21,7 @@ function NavBar() {
 
   return (
     <div className="flex">
-      <header className="pr-4 lg:px-6 h-16 sm:h-24 flex items-center fixed top-0 w-full z-50 transition-colors duration-300 bg-gradient-to-b from-white to-99%">
+      <header className="lg:px-6 h-16 sm:h-24 flex items-center fixed top-0 w-full z-50 transition-colors duration-300 bg-gradient-to-b from-white to-99%">
         {/* Link to home page */}
         <a className="pl-4 flex items-center justify-center" href="/">
           <span className="font-bold text-xl sm:text-3xl tracking-widest">Ravenda</span>
@@ -29,7 +29,7 @@ function NavBar() {
 
         {/* Menu button for small screens. Hidden in large screens */}
         <button
-          className="ml-auto block sm:hidden text-2xl"
+          className="ml-auto block sm:hidden text-2xl mr-6"
           onClick={toggleMenu}
         >
           <FiMenu />
