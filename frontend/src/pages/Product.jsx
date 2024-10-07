@@ -14,9 +14,28 @@ function Product() {
   const [selectedColor, setSelectedColor] = useState('');
   const [error, setError] = useState(null);
 
-  const cart = useCartStore((state) => state.cart)
+  const {cart} = useCartStore()
+  const addToCart = useCartStore(state => state.addToCart);
 
-  const addToCart = useCartStore((state) => state.addToCart);
+  const handleAdd = (product) => {
+    if (!selectedSize || !selectedColor) {
+      alert('Please select size and color');
+      return;
+    }
+  
+    const productWithDetails = {
+      ...product,
+      selectedSize,
+      selectedColor,
+    };
+  
+    addToCart(productWithDetails);
+    alert('Item successfully added to cart!');
+  };
+  
+  useEffect(() => {
+    console.log('Updated cart:', cart);
+  }, [cart]);
 
   useEffect(() => {
     const getProduct = async () => {
@@ -43,20 +62,6 @@ function Product() {
     getProduct();
   }, [id]);
 
-  const handleAddToCart = () => {
-    if (product && selectedSize && selectedColor) {
-      addToCart({ ...product, selectedSize, selectedColor });
-      alert('Item successfully added to cart!'); // Show success alert
-      console.log(cart);
-    } else {
-      alert('Could not add item to cart. Please select size and color.'); // Show error alert
-    }
-  };
-
-  // Log the updated cart value when it changes
-  useEffect(() => {
-    console.log('Updated cart:', cart);
-  }, [cart]);
   if (error) {
     return <p className="text-red-500">Error: {error}</p>;
   }
@@ -150,7 +155,7 @@ function Product() {
             <button
               className={`flex-1 bg-secondary_5 text-white px-4 py-2 rounded-md ${!selectedSize || !selectedColor ? 'opacity-50 cursor-not-allowed' : ''}`}
               disabled={!selectedSize || !selectedColor}
-              onClick={handleAddToCart}
+              onClick={()=>handleAdd(product)}
             >
               <div className='flex justify-center'>
                 <IoCart size={30} /> <span className='ml-2'>Add to Cart</span>
