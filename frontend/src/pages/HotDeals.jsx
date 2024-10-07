@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Card from '../components/Card';
 import NavBar from '../components/NavBar';
+import { Link } from 'react-router-dom';
 
 function HotDeals() {
 
@@ -59,23 +60,26 @@ function HotDeals() {
     
 
       {/* Products Grid Section */}
-      <div className="flex items-center justify-center">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 m-8 justify-items-center">
+      <div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 m-8 justify-items-center place-items-center">
           {hotProducts.map((product) => (
-            <Card
-              key={product._id}
-              img={product.image}
-              title={product.title}
-              description={product.category}
-              price={`$${product.price}`}
-            />
+            <Link className='flex justify-center'  key={product._id} to={`/product/${product._id}`}>
+              <Card
+                img={product.image}
+                title={product.title}
+                description={product.category}
+                price={`$${product.price}`}
+              />
+            </Link>
           ))}
         </div>
       </div>
-    
+
+
+
           
     
-        </div>
+    </div>
     
 
 

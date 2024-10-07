@@ -36,7 +36,9 @@ function App() {
           <Route path='/collections' element={<Collection/>}/>
           <Route path='/newArrivals' element={<NewArrivals/>}/>
           <Route path='/hotDeals' element={<HotDeals/>}/>
-          <Route path='/product' element={<Product/>}/>
+
+          <Route path='/product/:id' element={<Product />} />
+
           <Route path='/cart' element={<Cart/>}/>
           <Route path='/gallery' element={<Gallery/>}/>
           
