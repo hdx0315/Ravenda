@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { IoCart } from "react-icons/io5";
 import NavBar from '../components/NavBar';
 import useCartStore from '../store/useCartStore';
+import Swal from 'sweetalert2';  // Import Swal
 
 function Product() {
   const { id } = useParams();
@@ -14,12 +15,18 @@ function Product() {
   const [selectedColor, setSelectedColor] = useState('');
   const [error, setError] = useState(null);
 
-  const {cart} = useCartStore()
+  const { cart } = useCartStore();
   const addToCart = useCartStore(state => state.addToCart);
 
   const handleAdd = (product) => {
     if (!selectedSize || !selectedColor) {
-      alert('Please select size and color');
+      // Use SweetAlert to notify user to select size and color
+      Swal.fire({
+        title: 'Selection Required',
+        text: 'Please select both size and color.',
+        icon: 'warning',
+        confirmButtonText: 'OK'
+      });
       return;
     }
   
@@ -30,7 +37,14 @@ function Product() {
     };
   
     addToCart(productWithDetails);
-    alert('Item successfully added to cart!');
+    
+    // Show success message with SweetAlert
+    Swal.fire({
+      title: 'Added to Cart',
+      text: `${product.title} has been added to your cart.`,
+      icon: 'success',
+      confirmButtonText: 'OK'
+    });
   };
   
   useEffect(() => {
@@ -71,7 +85,7 @@ function Product() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 pt-20 font-main">
+    <div className="container mx-auto px-4 py-8 pt-20 mt-10 font-main">
       <NavBar />
       <div className="grid md:grid-cols-2 gap-8">
         <div className="relative aspect-square">
@@ -140,8 +154,7 @@ function Product() {
                         backgroundColor: selectedColor === color ? color : '',
                       }}
                       onMouseEnter={(e) => e.currentTarget.style.backgroundColor = color}
-                      onMouseLeave={(e) => e.currentTarget.style.backgroundColor = ''}
-                    >
+                      onMouseLeave={(e) => e.currentTarget.style.backgroundColor = ''}>
                       {color}
                     </span>
                   </label>
@@ -155,7 +168,7 @@ function Product() {
             <button
               className={`flex-1 bg-secondary_5 text-white px-4 py-2 rounded-md ${!selectedSize || !selectedColor ? 'opacity-50 cursor-not-allowed' : ''}`}
               disabled={!selectedSize || !selectedColor}
-              onClick={()=>handleAdd(product)}
+              onClick={() => handleAdd(product)}
             >
               <div className='flex justify-center'>
                 <IoCart size={30} /> <span className='ml-2'>Add to Cart</span>
