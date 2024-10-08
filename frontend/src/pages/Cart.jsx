@@ -4,6 +4,8 @@ import 'jspdf-autotable'; // Import the autotable plugin for table generation
 import useCartStore from '../store/useCartStore';
 import NavBar from '../components/NavBar';
 
+import Swal from 'sweetalert2'
+
 export default function Cart() {
   const { cart, total, removeFromCart, clearCart } = useCartStore();
 
@@ -19,12 +21,17 @@ export default function Cart() {
   }, [cart]);
 
   const generatePDF = () => {
+    if (!cart.length || !customerName || !telephone || !address) {
+      Swal.fire('Error', 'Please ensure the cart is not empty and all details are filled out.', 'error');
+      return;
+    }
+  
     const doc = new jsPDF();
     
     // Title
     doc.setFontSize(20);
     doc.text('Order Receipt', 20, 20);
-
+  
     // Customer Information
     doc.setFontSize(14);
     doc.text(`Customer Name: ${customerName}`, 20, 40);
@@ -41,15 +48,19 @@ export default function Cart() {
         item.quantity,
         `Rs.${item.price * item.quantity}.00`,
       ]),
-      startY: 70, // Starting position for the table
+      startY: 70,
     });
-
+  
     // Total amount
     doc.text(`Total: Rs.${total}.00`, 20, doc.lastAutoTable.finalY + 10);
-
+  
     // Save the PDF
     doc.save('order_receipt.pdf');
+  
+    // Show confirmation
+    Swal.fire('Order Placed!', 'Your receipt has been downloaded.', 'success');
   };
+  
 
   const handleCheckout = () => {
     setShowForm(true); // Show the customer information form
@@ -57,14 +68,75 @@ export default function Cart() {
 
   const handleProceed = (e) => {
     e.preventDefault();
-    setSubmitted(true); // Mark the form as submitted
-    setShowForm(false); // Hide the form after submitting
+    if (!customerName || !telephone || !address) {
+      Swal.fire("Please fill in all fields", "", "error");
+      return;
+    }
+    if (!/^\d{10}$/.test(telephone)) {
+      Swal.fire("Please enter a valid 10-digit telephone number", "", "error");
+      return;
+    }
+    setSubmitted(true);
+    setShowForm(false);
+
+    Swal.fire({
+      title: 'Details Submitted!',
+      text: 'You can now place your order.',
+      icon: 'success',
+      confirmButtonText: 'OK'
+    });
   };
+  
 
   const handleEditDetails = () => {
     setShowForm(true); // Show the form again for editing
     setSubmitted(false); // Reset the submitted state
   };
+
+  const handleRemove = (id, color, size) => {
+    Swal.fire({
+      title: "Do you want to remove this item ?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Remove",
+      denyButtonText: `Keep`,
+      icon:"question",
+      
+      confirmButtonColor: "#f00",
+      denyButtonColor: "#038f28",
+
+    }).then((result) => {
+      
+      if (result.isConfirmed) {
+        removeFromCart(id, color, size)
+        Swal.fire("Removed!", "", "success");
+
+      } else if (result.isDenied) {
+        Swal.fire("Kept ", "", "success");
+      }
+    });
+  }
+
+  const handleClearCart = () => {
+    Swal.fire({
+      title: "Are you sure you want to clear your cart?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Clear",
+      denyButtonText: `Cancel`,
+      icon: "question",
+      confirmButtonColor: "#f00",
+      denyButtonColor: "#038f28",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        clearCart();  // Clear the cart if the user confirms
+        Swal.fire("Cart cleared!", "", "success");
+      } else if (result.isDenied) {
+        Swal.fire("Cart not cleared", "", "info");
+      }
+    });
+  };
+  
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl font-main">
@@ -89,10 +161,11 @@ export default function Cart() {
                     <p className="text-sm">Quantity: {item.quantity}</p>
                   </div>
                   <div className="flex flex-col justify-center items-center sm:flex-row sm:items-center gap-2">
-                    <p className="font-semibold">Rs.{item.price * item.quantity}.00</p>
+                  <p className="font-normal">{item.price} * {item.quantity}</p>
+                  <p className="font-semibold">Rs.{item.price * item.quantity}.00</p>
                     <button
                       className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 transition-colors"
-                      onClick={() => removeFromCart(item._id, item.selectedColor, item.selectedSize)}
+                      onClick={() => handleRemove(item._id, item.selectedColor, item.selectedSize)}
                       aria-label={`Remove ${item.title} from cart`}
                     >
                       Remove
@@ -108,7 +181,7 @@ export default function Cart() {
             <p className="text-lg font-semibold">Total: Rs.{total}.00</p>
             <button
               className="bg-gray-200 text-gray-800 px-4 py-2 rounded hover:bg-gray-300 transition-colors"
-              onClick={clearCart}
+              onClick={()=> handleClearCart()}
               aria-label="Clear the cart"
             >
               Clear Cart
