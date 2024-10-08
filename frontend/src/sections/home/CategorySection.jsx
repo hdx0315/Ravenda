@@ -6,7 +6,7 @@ import b1 from '../../assets/images/bottom_1.jpg';
 
 function CategorySection() {
   return (
-    <div className='min-h-fit py-16 bg-gradient-to-b from-white from-0% via-primary to-white to-90%'>
+    <div className='min-h-fit py-16 bg-gradient-to-b from-white from-0% via-pink-300 to-white to-90%'>
       {/* Title Section */}
       <div className="text-center mb-12">
         <h2 className="text-4xl sm:text-5xl font-bold text-gray-800 font-main mb-4">
@@ -47,7 +47,7 @@ function CategorySection() {
       {/* Browse Collections Button */}
       <div className="flex justify-center items-center py-8">
         <a href="/collections">
-          <button className="px-8 py-4 text-white font-bold bg-secondary_5 hover:bg-green-500 hover:text-black tracking-widest rounded-lg text-lg transition-transform transform hover:scale-105">
+          <button className="px-8 py-4 text-white font-bold bg-pink-500 hover:bg-pink-600 hover:text-black tracking-widest rounded-lg text-lg transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-lg">
             Browse Collections
           </button>
         </a>

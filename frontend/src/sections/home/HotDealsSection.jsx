@@ -86,7 +86,7 @@ function HotDealsSection() {
       {/* Button Section */}
       <div className="flex justify-center items-center p-2">
         <a href="/hotDeals">
-          <button className="px-8 py-4 text-white font-bold bg-secondary_5 hover:bg-green-500 hover:text-black tracking-widest rounded-lg text-lg transition-transform transform hover:scale-105">
+          <button className="px-8 py-4 text-white font-bold bg-pink-500 hover:bg-pink-600 hover:text-black tracking-widest rounded-lg text-lg transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-lg">
             See More
           </button>
         </a>

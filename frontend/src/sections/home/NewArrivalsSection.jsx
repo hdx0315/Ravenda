@@ -9,10 +9,10 @@ function NewArrivalsSection() {
       
       {/* Title Section */}
       <div className="text-center">
-        <h2 className="text-4xl sm:text-5xl font-bold text-gray-800 font-main mb-4">
+        <h2 className="text-4xl sm:text-5xl font-bold text-pink-500 font-main mb-4">
           New Arrivals
         </h2>
-        <p className="text-gray-600 text-lg sm:text-2xl">
+        <p className="text-pink-400 text-lg sm:text-2xl">
           Discover the latest trends fresh off the runway.
         </p>
       </div>
@@ -97,7 +97,7 @@ function NewArrivalsSection() {
       {/* Button Section */}
       <div className="flex justify-center items-center p-2">
         <a href="/newArrivals">
-          <button className="px-8 py-4 text-white font-bold bg-secondary_5 hover:bg-green-500 hover:text-black tracking-widest rounded-lg text-lg transition-transform transform hover:scale-105">
+        <button className="px-8 py-4 text-white font-bold bg-pink-500 hover:bg-pink-600 hover:text-black tracking-widest rounded-lg text-lg transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-lg">
             See More
           </button>
         </a>
