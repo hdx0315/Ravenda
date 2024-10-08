@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from '../../components/Card';
 
-import { images } from '../../assets/images/assets-images';
+import { images } from '../../assets/images/new/assets-new-images';
 
 function NewArrivalsSection() {
   return (
