@@ -1,6 +1,3 @@
-
-// frontend/src/store/useCartStore.js
-
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -12,11 +9,19 @@ const useCartStore = create(
 
       // Add item to cart
       addToCart: (product, quantity = 1) => set((state) => {
-        const existingProduct = state.cart.find(item => item._id === product._id && item.selectedColor === product.selectedColor && item.selectedSize === product.selectedSize);
+        const existingProduct = state.cart.find(item => 
+          item._id === product._id && 
+          item.selectedColor === product.selectedColor && 
+          item.selectedSize === product.selectedSize
+        );
         if (existingProduct) {
           return {
             cart: state.cart.map(item =>
-              item._id === product._id ? { ...item, quantity: item.quantity + quantity } : item
+              item._id === product._id && 
+              item.selectedColor === product.selectedColor && 
+              item.selectedSize === product.selectedSize
+                ? { ...item, quantity: item.quantity + quantity }
+                : item
             ),
             total: state.total + product.price * quantity,
           };
@@ -28,7 +33,7 @@ const useCartStore = create(
       }),
 
       // Remove item from cart
-      removeFromCart: (productId,selectedColor,selectedSize) => set((state) => {
+      removeFromCart: (productId, selectedColor, selectedSize) => set((state) => {
         const productToRemove = state.cart.find(item => 
           item._id === productId && 
           item.selectedColor === selectedColor && 
@@ -41,19 +46,17 @@ const useCartStore = create(
           cart: state.cart.filter(item => 
             !(item._id === productId && 
               item.selectedColor === selectedColor && 
-              item.selectedSize === selectedSize) // Ensure only the specific item is removed
+              item.selectedSize === selectedSize)
           ),
-          total: state.total - (productToRemove.price * productToRemove.quantity), // Adjust total
+          total: state.total - (productToRemove.price * productToRemove.quantity),
         };
       }),
 
       // Clear the cart
       clearCart: () => set({ cart: [], total: 0 }),
     }),
-    { name: 'cart-storage' } // Persist cart state in localStorage
+    { name: 'cart-storage' }
   )
 );
 
 export default useCartStore;
-
-
