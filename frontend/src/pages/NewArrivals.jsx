@@ -48,11 +48,11 @@ function NewArrivals() {
       {error && <p>{error}</p>}
 
       {/* Title Section */}
-      <div className="text-center pt-24">
-        <h2 className="text-4xl sm:text-5xl font-bold text-gray-800 font-main mb-4">
+      <div className="text-center mt-52 py-10">
+        <h2 className="text-4xl sm:text-5xl font-bold text-pink-500 font-main mb-4">
           New Arrivals
         </h2>
-        <p className="text-gray-600 text-lg sm:text-2xl">
+        <p className="text-pink-400 text-lg sm:text-2xl">
           Discover the latest trends fresh off the runway.
         </p>
       </div>

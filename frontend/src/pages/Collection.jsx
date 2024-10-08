@@ -68,34 +68,12 @@ function Collection() {
       <NavBar />
 
       {/* In-Page Navigation Links with Toggle for Small Screens */}
-      <div className="fixed top-24 left-0 w-full z-10 p-1">
-        {/* Menu button for small screens */}
-        <button className="block sm:hidden text-2xl ml-auto p-2" onClick={toggleMenu}>
-          Collections
-        </button>
-
-        {/* Navigation links (shown or hidden based on the menu state) */}
-        <ul
-          className={`${
-            isMenuOpen ? 'flex' : 'hidden'
-          } flex-col sm:flex sm:flex-row justify-end items-end mt-2 sm:mt-0`}
-        >
-          {collectionSections.map((section, index) => (
-            <li key={index} className="mb-6">
-              <a
-                href={`#section-${index}`}
-                className="text-lg font-semibold p-4 bg-white sm:bg-transparent hover:text-primary hover:bg-black hover:rounded-lg transition-colors tracking-wider"
-                onClick={() => setIsMenuOpen(false)} // Close the menu after clicking a link
-              >
-                {section.title}
-              </a>
-            </li>
-          ))}
-        </ul>
+      <div className='text-pink-500 text-3xl font-bold flex justify-center mt-52'>
+        Ravenda Collections
       </div>
 
       {/* Collection Sections */}
-      <div className="mt-28 ">
+      <div className="">
         {error && <p className="text-red-500 text-center">{error}</p>}
 
         {collectionSections.map((section, index) => (
@@ -127,7 +105,8 @@ function Collection() {
             </div>
         ))}
       </div>
-
+      
+      <div className='my-20'></div>
       <Footer />
     </div>
   );

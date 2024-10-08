@@ -110,10 +110,12 @@ function NavBar() {
           </button>
           <a href="/" className="text-4xl font-bold text-pink-500">Ravenda</a>
           <div className="flex items-center">
-            <button aria-label="User account" className="mr-4">
-              <IoPersonOutline size={24} />
+            <button aria-label="User account" className="mr-8">
+              <a href="/auth/login">
+                <IoPersonOutline size={24} />
+              </a>
             </button>
-            <button aria-label="Cart">
+            <button aria-label="Cart" className='mr-4'>
               <FiShoppingCart size={24} />
             </button>
           </div>
