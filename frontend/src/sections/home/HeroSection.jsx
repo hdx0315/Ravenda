@@ -2,7 +2,6 @@
 
 import React from 'react'
 
-import HeroImg from '../../assets/images/hero_top_1.jpg'
 import HeroImg2 from '../../assets/images/frock_hero.jpg'
 
 function HeroSection() {
