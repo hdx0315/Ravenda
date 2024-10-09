@@ -15,6 +15,11 @@ const {
     deleteProductByID
 } = require('../controllers/adminEditItem')
 
+const {
+    getOrders,
+    createOrder
+} = require('../controllers/adminOrders')
+
 const router = express.Router();
 
 
@@ -32,6 +37,9 @@ router.get('/editItem', authenticate, getProducts)
 router.get('/editItem/:id', authenticate, getProductByID)
 router.put('/editItem/:id', authenticate, updateProductByID)
 router.delete('/editItem/:id', authenticate, deleteProductByID)
+
+router.post('/createOrder', createOrder)
+router.get('/getOrders', getOrders)
 
 module.exports = router;
 

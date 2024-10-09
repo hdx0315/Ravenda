@@ -27,6 +27,8 @@ const app = initializeApp(firebaseConfig);
 
 const imageDB = getStorage(app);
 
-export { imageDB, getStorage, ref, uploadBytes, getDownloadURL, uploadBytesResumable };
+const pdfDB = getStorage(app);
+
+export { imageDB, pdfDB, getStorage, ref, uploadBytes, getDownloadURL, uploadBytesResumable };
 
 
