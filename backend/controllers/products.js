@@ -30,4 +30,7 @@ const getSingleProduct = async (req, res) =>{
     }
 }
 
-module.exports = {getProducts, getSingleProduct}
+module.exports = {
+    getProducts, 
+    getSingleProduct
+}

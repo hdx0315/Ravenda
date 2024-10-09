@@ -4,7 +4,13 @@
 // Import the functions you need from the SDKs you need
 
 import { initializeApp } from "firebase/app";
-import { getStorage, ref, uploadBytes, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import { 
+    getStorage, 
+    ref, 
+    uploadBytes, 
+    getDownloadURL, 
+    uploadBytesResumable 
+} from "firebase/storage";
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -29,6 +35,14 @@ const imageDB = getStorage(app);
 
 const pdfDB = getStorage(app);
 
-export { imageDB, pdfDB, getStorage, ref, uploadBytes, getDownloadURL, uploadBytesResumable };
+export { 
+    imageDB, 
+    pdfDB, 
+    getStorage, 
+    ref, 
+    uploadBytes,
+    getDownloadURL, 
+    uploadBytesResumable 
+};
 
 
