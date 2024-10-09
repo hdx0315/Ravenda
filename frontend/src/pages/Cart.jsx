@@ -3,8 +3,12 @@ import { jsPDF } from 'jspdf';
 import 'jspdf-autotable'; // Import the autotable plugin for table generation
 import useCartStore from '../store/useCartStore';
 import NavBar from '../components/NavBar';
+import { FiTrash2 } from "react-icons/fi";
 
 import Swal from 'sweetalert2'
+
+
+import { pdfDB, getStorage, ref, uploadBytesResumable, getDownloadURL } from '../../../backend/firebase/firebase-config'
 
 export default function Cart() {
   const { cart, total, removeFromCart, clearCart } = useCartStore();
@@ -16,11 +20,14 @@ export default function Cart() {
   const [showForm, setShowForm] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
+  const [pdf, setPDF] = useState();
+  const [pdfURL, setPdfURL] = useState('')
+
   useEffect(() => {
     console.log('Cart state in Cart tab:', cart);
   }, [cart]);
 
-  const generatePDF = () => {
+  const generatePDF = async () => {
     if (!cart.length || !customerName || !telephone || !address) {
       Swal.fire('Error', 'Please ensure the cart is not empty and all details are filled out.', 'error');
       return;
@@ -28,16 +35,15 @@ export default function Cart() {
   
     const doc = new jsPDF();
     
-    // Title
+    // Title and customer info
     doc.setFontSize(20);
-    doc.text('Order Receipt', 20, 20);
-  
-    // Customer Information
+    doc.text('RAVENDA', 20, 20);
+    doc.text('Order Receipt', 20, 30);
     doc.setFontSize(14);
-    doc.text(`Customer Name: ${customerName}`, 20, 40);
-    doc.text(`Telephone: ${telephone}`, 20, 50);
-    doc.text(`Address: ${address}`, 20, 60);
-    
+    doc.text(`Customer Name: ${customerName}`, 20, 50);
+    doc.text(`Telephone: ${telephone}`, 20, 60);
+    doc.text(`Address: ${address}`, 20, 70);
+  
     // Adding cart items as a table
     doc.autoTable({
       head: [['Item', 'Color', 'Size', 'Quantity', 'Price']],
@@ -48,19 +54,83 @@ export default function Cart() {
         item.quantity,
         `Rs.${item.price * item.quantity}.00`,
       ]),
-      startY: 70,
+      startY: 80,
     });
   
     // Total amount
     doc.text(`Total: Rs.${total}.00`, 20, doc.lastAutoTable.finalY + 10);
   
-    // Save the PDF
-    doc.save('order_receipt.pdf');
+    // Convert the document to Blob
+    const pdfBlob = doc.output('blob');
+    setPDF(pdfBlob);
   
-    // Show confirmation
-    Swal.fire('Order Placed!', 'Your receipt has been downloaded.', 'success');
+    // Upload the PDF and wait for the URL
+    const pdfURL = await uploadPdfFirebase(pdfBlob);
+  
+    // Now upload order to Mongo with the correct PDF URL
+    await uploadOrderMongo(pdfURL);
+
+    doc.save('Order_reciept'+telephone)
+  
+    Swal.fire('Order Placed!', 'Your receipt has been uploaded and order has been placed.', 'success');
   };
   
+
+  const uploadPdfFirebase = (pdfBlob) => {
+    return new Promise((resolve, reject) => {
+      const storage = getStorage(); // Get Firebase storage instance
+      const pdfRef = ref(storage, `order_receipt_${telephone}.pdf`);
+      const uploadTask = uploadBytesResumable(pdfRef, pdfBlob);
+      
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          const progressPercentage = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+          console.log('Upload is ' + progressPercentage + '% done');
+        },
+        (error) => {
+          console.error('Upload error:', error);
+          Swal.fire('Error', 'There was an error uploading the PDF.', 'error');
+          reject(error); // Reject the promise on error
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            setPdfURL(downloadURL);
+            resolve(downloadURL); // Resolve the promise with the download URL
+          });
+        }
+      );
+    });
+  };
+  
+  const uploadOrderMongo = async (pdfURL) => {
+    const data = {
+      userName: customerName,
+      telephoneNumber: telephone,
+      address: address,
+      products: cart,
+      pdfURL: pdfURL // Pass the correct URL here
+    };
+  
+    console.log('Upload order data', data);
+    
+  //  const token = localStorage.getItem('token');
+  //  console.log('token', token);
+  
+    const response = await fetch('http://localhost:3000/api/v1/admin/createOrder', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+  
+    if (response.ok) {
+      Swal.fire("Order placed successfully", "", "success");
+    } else {
+      Swal.fire("Failed to place order", "", "error");
+    }
+  };
 
   const handleCheckout = () => {
     setShowForm(true); // Show the customer information form
@@ -141,7 +211,7 @@ export default function Cart() {
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl font-main">
       <NavBar />
-      <div className="bg-white shadow-md rounded-lg overflow-hidden">
+      <div className="bg-white shadow-md rounded-lg overflow-hidden mt-8 sm:mt-16">
         <div className="p-6 border-b border-gray-200">
           <h2 className="text-2xl font-bold">Shopping Cart</h2>
         </div>
@@ -161,14 +231,20 @@ export default function Cart() {
                     <p className="text-sm">Quantity: {item.quantity}</p>
                   </div>
                   <div className="flex flex-col justify-center items-center sm:flex-row sm:items-center gap-2">
-                  <p className="font-normal">{item.price} * {item.quantity}</p>
-                  <p className="font-semibold">Rs.{item.price * item.quantity}.00</p>
+                    <div className='flex flex-col'>
+                      <p className="font-normal">
+                        {item.price} * {item.quantity}
+                      </p>
+                      <p className="font-semibold tracking-wider">
+                        Rs . {item.price * item.quantity}.00
+                      </p>
+                    </div>
                     <button
-                      className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 transition-colors"
+                      className=" text-white p-2 rounded hover:bg-red-100 transition-colors"
                       onClick={() => handleRemove(item._id, item.selectedColor, item.selectedSize)}
                       aria-label={`Remove ${item.title} from cart`}
                     >
-                      Remove
+                      <FiTrash2 color='red' size={24} className='hover:text-white'/>
                     </button>
                   </div>
                 </div>
@@ -180,14 +256,14 @@ export default function Cart() {
           <div className="p-6 bg-gray-50 flex flex-col sm:flex-row justify-between items-center gap-4">
             <p className="text-lg font-semibold">Total: Rs.{total}.00</p>
             <button
-              className="bg-gray-200 text-gray-800 px-4 py-2 rounded hover:bg-gray-300 transition-colors"
+              className=" text-black px-4 py-2 rounded hover:bg-red-200 transition-colors border-2 border-gray-300"
               onClick={()=> handleClearCart()}
               aria-label="Clear the cart"
             >
               Clear Cart
             </button>
             <button
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
+              className="bg-pink-400 text-white px-4 py-2 rounded hover:bg-pink-500 transition-colors"
               onClick={handleCheckout}
               aria-label="Proceed to checkout"
             >
