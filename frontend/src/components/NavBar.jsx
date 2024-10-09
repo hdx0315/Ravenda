@@ -115,8 +115,10 @@ function NavBar() {
                 <IoPersonOutline size={24} />
               </a>
             </button>
-            <button aria-label="Cart" className='mr-4'>
-              <FiShoppingCart size={24} />
+            <button aria-label="Cart">
+              <a href="/cart">
+                <FiShoppingCart size={24} />
+              </a>
             </button>
           </div>
         </div>

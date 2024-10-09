@@ -70,6 +70,16 @@ const AdminNavbar = () => {
           >
             Logout
           </Link>
+
+          
+
+          <Link
+            to="/admin/orders"
+            className="px-4 py-2 hover:bg-gray-300 rounded transition duration-300"
+          >
+            Orders
+          </Link>
+
           
         </div>
       </div>

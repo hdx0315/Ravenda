@@ -3,7 +3,7 @@ import { FaFacebook, FaInstagram, FaTwitter, FaWhatsapp  } from 'react-icons/fa'
 
 function Footer() {
   return (
-    <footer className=" w-full bg-pink-400 text-black font-bold">
+    <footer className=" w-full bg-pink-300 tracking-wider text-white font-bold">
       <div className="container px-4 md:px-6 py-12 md:py-24 lg:py-32">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
           {/* Subscription Section */}
@@ -18,7 +18,7 @@ function Footer() {
                 placeholder="Enter your email"
                 type="email"
               />
-              <button className="max-w-sm bg-white text-black hover:bg-gray-200 px-4 py-2 font-semibold rounded-md my-4 sm:my-4">
+              <button className="max-w-sm bg-white text-black hover:bg-gray-400 px-4 py-2 font-semibold rounded-md my-4 sm:my-4">
                 Subscribe
               </button>
             </form>
