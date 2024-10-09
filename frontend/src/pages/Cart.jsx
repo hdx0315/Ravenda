@@ -32,6 +32,7 @@ export default function Cart() {
       Swal.fire('Error', 'Please ensure the cart is not empty and all details are filled out.', 'error');
       return;
     }
+    
   
     const doc = new jsPDF();
     
