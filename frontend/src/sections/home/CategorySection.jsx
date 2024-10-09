@@ -11,9 +11,11 @@ function CategorySection() {
     <div className='min-h-fit py-16 bg-gradient-to-b from-white from-0% via-pink-200 to-white to-90%'>
       {/* Title Section */}
       <div className="text-center mb-12">
+
         <h2 className="text-4xl sm:text-5xl font-bold text-gray-800 font-main mb-4">
           Our Collections
         </h2>
+
         <p className="text-gray-600 text-lg sm:text-2xl">
           Explore our curated collections of stylish apparel
         </p>
@@ -23,25 +25,31 @@ function CategorySection() {
       <div className='flex flex-wrap p-4 justify-center gap-8'>
         {/* Frocks */}
         <a href='/collections#section-0' className='group p-2 mx-0 lg:mx-10 transform transition-all hover:scale-105'>
+
           <div className='flex items-center text-xl font-bold tracking-wide'>
             Frocks <FiArrowRight className='ml-2 text-lg' />
           </div>
+
           <img src={images.f4} alt="Frocks" className='w-60 h-80 object-cover mt-2 rounded-lg shadow-lg group-hover:shadow-2xl transition-shadow' />
         </a>
 
         {/* Tops */}
         <a href='/collections#section-1' className='group p-2 mx-0 lg:mx-10 transform transition-all hover:scale-105'>
+
           <div className='flex items-center text-xl font-bold tracking-wide'>
             Tops <FiArrowRight className='ml-2 text-lg' />
           </div>
+
           <img src={images.t3} alt="Tops" className='w-60 h-80 object-cover mt-2 rounded-lg shadow-lg group-hover:shadow-2xl transition-shadow' />
         </a>
 
         {/* Bottoms */}
         <a href='/collections#section-2' className='group p-2 mx-0 lg:mx-10 transform transition-all hover:scale-105'>
+
           <div className='flex items-center text-xl font-bold tracking-wide'>
             Bottoms <FiArrowRight className='ml-2 text-lg' />
           </div>
+          
           <img src={images.b2} alt="Bottoms" className='w-60 h-80 object-cover mt-2 rounded-lg shadow-lg group-hover:shadow-2xl transition-shadow' />
         </a>
       </div>

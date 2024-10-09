@@ -12,12 +12,6 @@ function NavBar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white">
 
-      {/* Top banner 
-      <div className="bg-pink-300 text-center py-2 text-sm">
-        text
-      </div>
-      */}
-
       {/* Mobile navbar */}
       <div className="sm:hidden">
         <div className="flex justify-between items-center px-4 py-3">
@@ -108,20 +102,27 @@ function NavBar() {
           <button aria-label="Search">
             <FiSearch size={24} />
           </button>
-          <a href="/" className="text-4xl font-bold text-pink-500">Ravenda</a>
+
+          <a href="/" className="text-4xl font-bold text-pink-500">
+          Ravenda
+          </a>
+
           <div className="flex items-center">
             <button aria-label="User account" className="mr-8">
               <a href="/auth/login">
                 <IoPersonOutline size={24} />
               </a>
             </button>
+
             <button aria-label="Cart">
               <a href="/cart">
                 <FiShoppingCart size={24} />
               </a>
             </button>
+
           </div>
         </div>
+        
         <nav className="border-t border-b border-gray-200">
           <ul className="flex justify-center space-x-8 py-4 font-bold">
             

@@ -62,40 +62,89 @@ function AdminOrders() {
 
     return (
         <div className="bg-gray-100 min-h-screen">
+
             <AdminNavbar />
+
             <div className="container mx-auto px-4 py-8">
-                <h1 className="text-3xl font-bold mb-6 text-gray-800">Orders</h1>
+
+                <h1 className="text-3xl font-bold mb-6 text-gray-800">
+                    Orders
+                </h1>
+
                 {orders.length === 0 ? (
-                    <p className="text-lg text-gray-600">No orders found.</p>
+                    <p className="text-lg text-gray-600">
+                        No orders found.
+                    </p>
                 ) : (
                     <div className="grid gap-6 lg:grid-cols-2">
                         {orders.map((order) => (
                             <div key={order._id} className="bg-white rounded-lg shadow-md overflow-hidden">
                                 <div className="p-6">
-                                    <h2 className="text-xl font-semibold mb-2">Order for: {order.userName}</h2>
-                                    <p className="text-gray-600"><strong>Address:</strong> {order.address}</p>
-                                    <p className="text-gray-600 mb-4"><strong>Phone:</strong> {order.telephoneNumber}</p>
+
+                                    <h2 className="text-xl font-semibold mb-2">
+                                        Order for: {order.userName}
+                                    </h2>
+
+                                    <p className="text-gray-600">
+                                        <strong>Address:</strong> {order.address}
+                                    </p>
+
+                                    <p className="text-gray-600 mb-4">
+                                        <strong>Phone:</strong> {order.telephoneNumber}
+                                    </p>
+
                                     <div className="overflow-x-auto">
+
                                         <table className="min-w-full divide-y divide-gray-200">
+
                                             <thead className="bg-gray-50">
                                                 <tr>
-                                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">#</th>
-                                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Image</th>
-                                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
-                                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Color</th>
-                                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Size</th>
+                                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        #
+                                                    </th>
+
+                                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        Image
+                                                    </th>
+
+                                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        Title
+                                                    </th>
+
+                                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        Color
+                                                    </th>
+
+                                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        Size
+                                                    </th>
+
                                                 </tr>
                                             </thead>
+
                                             <tbody className="bg-white divide-y divide-gray-200">
                                                 {order.products.map((product, index) => (
                                                     <tr key={product._id}>
-                                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{index + 1}</td>
+                                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                            {index + 1}
+                                                        </td>
+
                                                         <td className="px-6 py-4 whitespace-nowrap">
                                                             <img src={product.image} alt={product.title} className="h-10 w-10 rounded-full" />
                                                         </td>
-                                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{product.title}</td>
-                                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.selectedColor}</td>
-                                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.selectedSize}</td>
+
+                                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                            {product.title}
+                                                        </td>
+
+                                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                            {product.selectedColor}
+                                                        </td>
+
+                                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                            {product.selectedSize}
+                                                        </td>
+                                                        
                                                     </tr>
                                                 ))}
                                             </tbody>

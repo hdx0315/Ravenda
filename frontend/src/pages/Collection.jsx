@@ -40,6 +40,7 @@ function Collection() {
 
       const allProducts = await response.json();
       setProducts(allProducts);
+
     } catch (error) {
       setError(error.message || 'Failed to fetch products');
       console.error('Error fetching products:', error);
@@ -49,9 +50,11 @@ function Collection() {
   // Group products by category
   const groupedProducts = products.reduce((acc, product) => {
     const category = product.category || 'Others'; // Default to 'Others' if category is not defined
+
     if (!acc[category]) {
       acc[category] = [];
     }
+
     acc[category].push(product);
     return acc;
   }, {});
@@ -74,7 +77,9 @@ function Collection() {
 
       {/* Collection Sections */}
       <div className="">
-        {error && <p className="text-red-500 text-center">{error}</p>}
+        {error && <p className="text-red-500 text-center">
+          {error}
+        </p>}
 
         {collectionSections.map((section, index) => (
           <div
@@ -83,8 +88,14 @@ function Collection() {
             className="flex flex-col pt-16 justify-center items-center"
           >
             <div className="w-2/3 text-center my-8 flex flex-col justify-center items-center">
-              <h3 className="text-3xl font-bold text-gray-800">{section.title}</h3>
-              <p className="text-lg text-gray-600">{section.description}</p>
+
+              <h3 className="text-3xl font-bold text-gray-800">
+                {section.title}
+              </h3>
+
+              <p className="text-lg text-gray-600">
+                {section.description}
+              </p>
             </div>
 
             {/* Cards Section */}

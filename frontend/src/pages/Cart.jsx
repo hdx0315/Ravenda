@@ -28,11 +28,12 @@ export default function Cart() {
   }, [cart]);
 
   const generatePDF = async () => {
+
     if (!cart.length || !customerName || !telephone || !address) {
       Swal.fire('Error', 'Please ensure the cart is not empty and all details are filled out.', 'error');
       return;
     }
-    
+
   
     const doc = new jsPDF();
     
@@ -74,10 +75,12 @@ export default function Cart() {
     doc.save('Order_reciept'+telephone)
   
     Swal.fire('Order Placed!', 'Your receipt has been uploaded and order has been placed.', 'success');
+
   };
   
 
   const uploadPdfFirebase = (pdfBlob) => {
+
     return new Promise((resolve, reject) => {
       const storage = getStorage(); // Get Firebase storage instance
       const pdfRef = ref(storage, `order_receipt_${telephone}.pdf`);
@@ -128,25 +131,31 @@ export default function Cart() {
   
     if (response.ok) {
       Swal.fire("Order placed successfully", "", "success");
+
     } else {
       Swal.fire("Failed to place order", "", "error");
     }
   };
 
+
   const handleCheckout = () => {
     setShowForm(true); // Show the customer information form
   };
 
+
   const handleProceed = (e) => {
     e.preventDefault();
+
     if (!customerName || !telephone || !address) {
       Swal.fire("Please fill in all fields", "", "error");
       return;
     }
+
     if (!/^\d{10}$/.test(telephone)) {
       Swal.fire("Please enter a valid 10-digit telephone number", "", "error");
       return;
     }
+
     setSubmitted(true);
     setShowForm(false);
 
@@ -199,9 +208,11 @@ export default function Cart() {
       confirmButtonColor: "#f00",
       denyButtonColor: "#038f28",
     }).then((result) => {
+
       if (result.isConfirmed) {
         clearCart();  // Clear the cart if the user confirms
         Swal.fire("Cart cleared!", "", "success");
+
       } else if (result.isDenied) {
         Swal.fire("Cart not cleared", "", "info");
       }
@@ -211,35 +222,54 @@ export default function Cart() {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl font-main">
+
       <NavBar />
+
       <div className="bg-white shadow-md rounded-lg overflow-hidden mt-8 sm:mt-16">
         <div className="p-6 border-b border-gray-200">
-          <h2 className="text-2xl font-bold">Shopping Cart</h2>
+          <h2 className="text-2xl font-bold">
+            Shopping Cart
+          </h2>
         </div>
+
         <div className="p-6">
           {cart.length === 0 ? (
-            <p className="text-lg text-gray-600">Your cart is empty.</p>
+            <p className="text-lg text-gray-600">
+              Your cart is empty.
+            </p>
+
           ) : (
             <div className="space-y-8">
               {cart.map(item => (
                 <div key={item._id + item.selectedColor + item.selectedSize} className="flex flex-row justify-center items-start gap-4 pb-4 border-b">
                   <img src={item.image} alt={item.title} className="w-24 h-24 object-cover rounded" />
+
                   <div className="flex-1 space-y-1">
-                    <h3 className="font-semibold">{item.title}</h3>
+                    <h3 className="font-semibold">
+                      {item.title}
+                    </h3>
+
                     <p className="text-sm text-gray-600">
                       {item.selectedColor}, {item.selectedSize}
                     </p>
-                    <p className="text-sm">Quantity: {item.quantity}</p>
+
+                    <p className="text-sm">
+                      Quantity: {item.quantity}
+                    </p>
                   </div>
+
                   <div className="flex flex-col justify-center items-center sm:flex-row sm:items-center gap-2">
+
                     <div className='flex flex-col'>
                       <p className="font-normal">
                         {item.price} * {item.quantity}
                       </p>
+
                       <p className="font-semibold tracking-wider">
                         Rs . {item.price * item.quantity}.00
                       </p>
                     </div>
+
                     <button
                       className=" text-white p-2 rounded hover:bg-red-100 transition-colors"
                       onClick={() => handleRemove(item._id, item.selectedColor, item.selectedSize)}
@@ -253,9 +283,14 @@ export default function Cart() {
             </div>
           )}
         </div>
+
+
         {cart.length > 0 && (
           <div className="p-6 bg-gray-50 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p className="text-lg font-semibold">Total: Rs.{total}.00</p>
+            <p className="text-lg font-semibold">
+              Total: Rs.{total}.00
+            </p>
+
             <button
               className=" text-black px-4 py-2 rounded hover:bg-red-200 transition-colors border-2 border-gray-300"
               onClick={()=> handleClearCart()}
@@ -263,6 +298,7 @@ export default function Cart() {
             >
               Clear Cart
             </button>
+
             <button
               className="bg-pink-400 text-white px-4 py-2 rounded hover:bg-pink-500 transition-colors"
               onClick={handleCheckout}
@@ -270,6 +306,7 @@ export default function Cart() {
             >
               Proceed to Checkout
             </button>
+
           </div>
         )}
       </div>
@@ -277,10 +314,16 @@ export default function Cart() {
       {/* Checkout Form */}
       {showForm && (
         <div className="mt-8 p-4 bg-gray-100 rounded-lg">
-          <h3 className="text-lg font-semibold">Enter Delivery Information</h3>
+          <h3 className="text-lg font-semibold">
+            Enter Delivery Information
+          </h3>
+
           <form onSubmit={handleProceed} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium">Name</label>
+              <label className="block text-sm font-medium">
+                Name
+              </label>
+
               <input
                 type="text"
                 value={customerName}
@@ -289,8 +332,12 @@ export default function Cart() {
                 required
               />
             </div>
+
             <div>
-              <label className="block text-sm font-medium">Telephone</label>
+              <label className="block text-sm font-medium">
+                Telephone
+              </label>
+
               <input
                 type="tel"
                 value={telephone}
@@ -299,8 +346,12 @@ export default function Cart() {
                 required
               />
             </div>
+
             <div>
-              <label className="block text-sm font-medium">Address</label>
+              <label className="block text-sm font-medium">
+                Address
+              </label>
+
               <input
                 type="text"
                 value={address}
@@ -309,12 +360,14 @@ export default function Cart() {
                 required
               />
             </div>
+
             <button
               type="submit"
               className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
             >
               Submit
             </button>
+
           </form>
         </div>
       )}
@@ -322,17 +375,37 @@ export default function Cart() {
       {/* Display Customer Details after Submission */}
       {submitted && (
         <div className="mt-8 p-4 bg-gray-100 rounded-lg">
-          <h3 className="text-lg font-semibold">Delivery Information</h3>
-          <p><strong>Name:</strong> {customerName}</p>
-          <p><strong>Telephone:</strong> {telephone}</p>
-          <p><strong>Address:</strong> {address}</p>
+
+          <h3 className="text-lg font-semibold">
+            Delivery Information
+          </h3>
+          
+          <p>
+            <strong>Name:</strong> 
+            {customerName}
+          </p>
+
+          <p>
+            <strong>Telephone:</strong> 
+            {telephone}
+          </p>
+
+          <p>
+            <strong>Address:</strong> 
+            {address}
+          </p>
+
           <button
             className="m-2 bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
             onClick={handleEditDetails}
           >
             EDIT DETAILS
           </button>
-          <p className="mt-4 text-sm text-gray-600">THIS DETAILS ARE CORRECT AND PROCEED TO PLACE ORDER</p>
+
+          <p className="mt-4 text-sm text-gray-600">
+            THIS DETAILS ARE CORRECT AND PROCEED TO PLACE ORDER
+          </p>
+          
           <button
             className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 m-2"
             onClick={generatePDF}

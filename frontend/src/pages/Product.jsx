@@ -98,16 +98,26 @@ function Product() {
 
         <div className="flex flex-col justify-between">
           <div>
-            <h1 className="text-3xl font-bold mb-2">{product.title}</h1>
-            <p className="text-2xl font-semibold mb-4">Rs.{product.price} .00</p>
+            <h1 className="text-3xl font-bold mb-2">
+              {product.title}
+            </h1>
+
+            <p className="text-2xl font-semibold mb-4">
+              Rs.{product.price} .00
+            </p>
+
             <p className="text-muted-foreground mb-6">
               Elevate your style with our {product.title}. This piece combines comfort with trendy design elements.
             </p>
 
             {/* Size Selection */}
             <div className="mb-6">
-              <h2 className="text-lg font-semibold mb-2">Select Size</h2>
+              <h2 className="text-lg font-semibold mb-2">
+                Select Size
+              </h2>
+
               <div className="flex gap-2">
+
                 {product.sizes.map((size) => (
                   <label key={size} className="relative">
                     <input
@@ -132,7 +142,10 @@ function Product() {
 
             {/* Color Selection */}
             <div className="mb-6">
-              <h2 className="text-lg font-semibold mb-2">Select Color</h2>
+              <h2 className="text-lg font-semibold mb-2">
+                Select Color
+              </h2>
+
               <div className="flex gap-2">
                 {product.colors.map((color) => (
                   <label key={color} className="relative">
@@ -171,14 +184,21 @@ function Product() {
               onClick={() => handleAdd(product)}
             >
               <div className='flex justify-center'>
-                <IoCart size={30} /> <span className='ml-2'>Add to Cart</span>
+                <IoCart size={30} /> <span className='ml-2'>
+                  Add to Cart
+                </span>
+
               </div>
             </button>
           </div>
 
           {/* Product Details */}
           <div className="my-8 mb-20">
-            <h2 className="text-lg font-semibold mb-2">Product Details</h2>
+
+            <h2 className="text-lg font-semibold mb-2">
+              Product Details
+            </h2>
+
             <ul className="list-disc list-inside text-muted-foreground">
               <li>Category: {product.category}</li>
               <li>Colors: {product.colors.join(', ')}</li>
@@ -186,6 +206,7 @@ function Product() {
               {product.hotDeal && <li>🔥 Hot Deal</li>}
               {product.newArrival && <li>🌟 New Arrival</li>}
             </ul>
+            
           </div>
         </div>
       </div>

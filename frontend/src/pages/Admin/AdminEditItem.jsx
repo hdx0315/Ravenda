@@ -139,12 +139,18 @@ function AdminEditItem() {
             <AdminNavbar/>
         
             <div className="bg-white shadow-lg rounded-lg p-6 max-w-lg w-full">
-                <h2 className="text-2xl font-semibold text-center text-gray-700 mb-6">Admin Edit Product</h2>
+
+                <h2 className="text-2xl font-semibold text-center text-gray-700 mb-6">
+                    Admin Edit Product
+                </h2>
 
                 {/* Text Input */}
                 <div className="mb-4">
                     
-                    <label htmlFor="text-input" className="block text-lg font-medium text-gray-700 mb-2">Product Title</label>
+                    <label htmlFor="text-input" className="block text-lg font-medium text-gray-700 mb-2">
+                        Product Title
+                    </label>
+
                     <input
                         type="text"
                         id="text-input"
@@ -157,7 +163,10 @@ function AdminEditItem() {
 
                 {/* Price Input */}
                 <div className="mb-4">
-                    <label htmlFor="price-input" className="block text-lg font-medium text-gray-700 mb-2">Price</label>
+                    <label htmlFor="price-input" className="block text-lg font-medium text-gray-700 mb-2">
+                        Price
+                    </label>
+
                     <input
                         type="number"
                         id="price-input"
@@ -170,7 +179,10 @@ function AdminEditItem() {
 
                 {/* Category Input */}
                 <div className="mb-4">
-                    <label htmlFor="category-input" className="block text-lg font-medium text-gray-700 mb-2">Category</label>
+                    <label htmlFor="category-input" className="block text-lg font-medium text-gray-700 mb-2">
+                        Category
+                    </label>
+
                     <input
                         type="text"
                         id="category-input"
@@ -209,7 +221,10 @@ function AdminEditItem() {
 
                 {/* Colors Input */}
                 <div className="mb-4">
-                    <label className="block text-lg font-medium text-gray-700 mb-2">Colors (comma separated)</label>
+                    <label className="block text-lg font-medium text-gray-700 mb-2">
+                        Colors (comma separated)
+                    </label>
+
                     <input
                         type="text"
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
@@ -221,7 +236,10 @@ function AdminEditItem() {
 
                 {/* Sizes Input */}
                 <div className="mb-4">
-                    <label className="block text-lg font-medium text-gray-700 mb-2">Sizes (comma separated)</label>
+                    <label className="block text-lg font-medium text-gray-700 mb-2">
+                        Sizes (comma separated)
+                    </label>
+
                     <input
                         type="text"
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
@@ -233,7 +251,10 @@ function AdminEditItem() {
 
                 {/* Image Selection */}
                 <div className="mb-4">
-                    <label className="block text-lg font-medium text-gray-700 mb-2">Select Image</label>
+                    <label className="block text-lg font-medium text-gray-700 mb-2">
+                        Select Image
+                    </label>
+
                     <input
                         type="file"
                         accept="image/*"
@@ -245,7 +266,9 @@ function AdminEditItem() {
                 {/* Image Preview */}
                 {imgURL && (
                     <div className="mb-4">
-                        <p className="text-lg text-gray-700 mb-2">Image Preview:</p>
+                        <p className="text-lg text-gray-700 mb-2">
+                            Image Preview:
+                        </p>
                         <img src={imgURL} alt="Preview" className="w-full h-auto rounded-lg shadow-md mb-2" />
                     </div>
                 )}
@@ -253,7 +276,9 @@ function AdminEditItem() {
                 {/* Upload Progress Bar */}
                 {uploading && (
                     <div className="mb-4">
-                        <p className="text-lg text-gray-700 mb-2">Uploading: {progress}%</p>
+                        <p className="text-lg text-gray-700 mb-2">
+                            Uploading: {progress}%
+                        </p>
                         <div className="w-full bg-gray-200 rounded-full">
                             <div className="bg-primary h-2 rounded-full" style={{ width: `${progress}%` }}></div>
                         </div>

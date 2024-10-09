@@ -21,10 +21,10 @@ const AdminNavbar = () => {
         },
       });
 
-      // Clear the token from local storage
+      
       localStorage.removeItem('token');
 
-      // Redirect to the login page
+      
       navigate('/admin/login'); 
     } catch (error) {
       console.error('Logout failed', error);
