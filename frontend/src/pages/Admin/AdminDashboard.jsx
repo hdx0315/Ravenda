@@ -4,6 +4,8 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { PlusCircle, Edit, ShoppingBag, LogOut } from 'lucide-react';
+
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -14,6 +16,10 @@ const Dashboard = () => {
 
   const handleEditItem = () => {
     navigate('/admin/editItem');
+  };
+
+  const handleViewOrders = () => {
+    navigate('/admin/orders');
   };
 
 
@@ -42,34 +48,44 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
-
-      <div className="bg-white shadow-md rounded-lg p-8 max-w-lg w-full">
-
-        <h1 className="text-2xl font-semibold text-black mb-6">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
+      <div className="bg-white shadow-lg rounded-xl p-8 max-w-md w-full">
+        <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">
           Admin Dashboard
         </h1>
 
-        <div className="space-y-4 flex flex-col justify-center items-center">
+        <div className="space-y-6">
           <button
             onClick={handleAddProduct}
-            className="w-72 bg-sky-300 text- py-2 px-4 rounded-lg hover:bg-sky-500  hover:text-white transition duration-300"
+            className="w-full bg-blue-500 text-white py-3 px-4 rounded-lg hover:bg-blue-600 transition duration-300 flex items-center justify-center space-x-2 shadow-md"
           >
-            Add a New Product
+            <PlusCircle size={20} />
+            <span>Add a New Product</span>
           </button>
 
           <button
             onClick={handleEditItem}
-            className="w-72 bg-emerald-400 text- py-2 px-4 rounded-lg hover:bg-emerald-600  hover:text-white transition duration-300"
+            className="w-full bg-green-500 text-white py-3 px-4 rounded-lg hover:bg-green-600 transition duration-300 flex items-center justify-center space-x-2 shadow-md"
           >
-            Edit Item
+            <Edit size={20} />
+            <span>Edit Item</span>
           </button>
 
-          <button onClick={handleLogout} className="w-72 bg-rose-400 text- py-2 px-4 rounded-lg hover:bg-red-600 hover:text-white transition duration-300"
+          <button
+            onClick={handleViewOrders}
+            className="w-full bg-purple-500 text-white py-3 px-4 rounded-lg hover:bg-purple-600 transition duration-300 flex items-center justify-center space-x-2 shadow-md"
           >
-            Logout
+            <ShoppingBag size={20} />
+            <span>View Orders</span>
           </button>
-          
+
+          <button 
+            onClick={handleLogout}
+            className="w-full bg-red-500 text-white py-3 px-4 rounded-lg hover:bg-red-600 transition duration-300 flex items-center justify-center space-x-2 shadow-md"
+          >
+            <LogOut size={20} />
+            <span>Logout</span>
+          </button>
         </div>
       </div>
     </div>
