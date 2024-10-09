@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Card from '../components/Card';
 import NavBar from '../components/NavBar';
 import { Link } from 'react-router-dom';
+import Footer from '../components/Footer'
 
 function NewArrivals() {
   const [newProducts, setNewProducts] = useState([]);
@@ -68,12 +69,14 @@ function NewArrivals() {
               img={product.image}
               title={product.title}
               description={product.category}
-              price={`$${product.price}`}
+              price={`RS. ${product.price}`}
             />
             </Link>
           ))}
         </div>
       </div>
+
+      <Footer/>
     </div>
   );
 }

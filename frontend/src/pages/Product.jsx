@@ -85,7 +85,7 @@ function Product() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 pt-20 mt-10 font-main">
+    <div className="container mx-auto px-4 py-8 mt-12 sm:mt-52 font-main">
       <NavBar />
       <div className="grid md:grid-cols-2 gap-8">
         <div className="relative aspect-square">
@@ -120,7 +120,7 @@ function Product() {
                     />
                     <span className={`flex items-center justify-center w-12 h-12 border-2 rounded-md cursor-pointer
                       ${selectedSize === size 
-                        ? 'border-white bg-secondary_5 text-white font-bold' 
+                        ? 'border-white  bg-black text-white font-bold' 
                         : 'border-input hover:bg-neutral-300 hover:text-black'
                       }`}>
                       {size}
@@ -147,7 +147,7 @@ function Product() {
                     <span
                       className={`flex items-center justify-center w-12 h-12 border-2 rounded-md cursor-pointer capitalize
                         ${selectedColor === color
-                          ? 'border-white bg-secondary_5 text-white font-bold' 
+                          ? 'border-white bg-black text-white font-bold' 
                           : 'border-input'
                         }`}
                       style={{
@@ -166,7 +166,7 @@ function Product() {
           {/* Action Buttons */}
           <div className="flex gap-4">
             <button
-              className={`flex-1 bg-secondary_5 text-white px-4 py-2 rounded-md ${!selectedSize || !selectedColor ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className={`flex-1 bg-pink-300 text-white px-4 py-2 rounded-md ${!selectedSize || !selectedColor ? 'opacity-50 cursor-not-allowed' : ''}`}
               disabled={!selectedSize || !selectedColor}
               onClick={() => handleAdd(product)}
             >
@@ -177,7 +177,7 @@ function Product() {
           </div>
 
           {/* Product Details */}
-          <div className="mt-8">
+          <div className="my-8 mb-20">
             <h2 className="text-lg font-semibold mb-2">Product Details</h2>
             <ul className="list-disc list-inside text-muted-foreground">
               <li>Category: {product.category}</li>
