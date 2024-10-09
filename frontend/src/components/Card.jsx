@@ -1,18 +1,30 @@
-import React from 'react';
-import l2 from '../assets/logo/logo_2.jpg'
 
-function Card() {
+//  frontend/src/components/Card.jsx
+import React from 'react';
+
+function Card(props) {
   return (
-    <div className="w-9/12 h-9/12  bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105">
+    <div className="w-9/12 h-9/12 bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105">
       <img
-        className="object-cover w-full h-2/3"
-        src={l2}
+        className="object-cover max-w-full"
+        src={props.img}
         alt="Product"
       />
       <div className="p-4 text-center">
-        <h2 className="text-xl font-bold text-gray-800">Name</h2>
-        <p className="text-gray-600 mt-1">Lorem ipsum dolor sit amet.</p>
-        <p className="text-gray-400 mt-1">$99.99</p>
+        {/* Title */}
+        <h2 className={`text-black font-bold text-xl tracking-wider mt-1 ${props.titleStyles}`}>
+          {props.title}
+        </h2>
+
+        {/* Description */}
+        <p className={`text-black tracking-wider mt-1 ${props.descStyles}`}>
+          {props.description}
+        </p>
+
+        {/* Price */}
+        <p className={`text-black font-bold text-xl tracking-wider mt-1 ${props.priceStyles}`}>
+          {props.price}
+        </p>
       </div>
     </div>
   );

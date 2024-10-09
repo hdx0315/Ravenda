@@ -50,6 +50,30 @@ const adminSchema = new mongoose.Schema({
   },
 });
 
+const orderSchema = new mongoose.Schema({
+
+  userName: {
+    type: String,
+    required: true,
+  },
+  telephoneNumber: {
+    required: true,
+    type:String
+  },
+  address:{
+    type: String,
+    required: true,
+  },
+  products: {
+    type:Object
+  },
+  pdfURL: {
+    type: String
+  }
+
+
+});
+
 // Hash password before saving the admin
 adminSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
@@ -63,5 +87,6 @@ adminSchema.pre('save', async function (next) {
 
 const Admin = mongoose.model('Admin', adminSchema);
 const Detail = mongoose.model('Detail', addProductSchema);
+const Orders = mongoose.model('Orders', orderSchema);
 
-module.exports = { Detail, Admin };
+module.exports = { Detail, Admin, Orders };

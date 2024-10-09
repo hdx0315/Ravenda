@@ -3,12 +3,8 @@
 // backend/firebase/firebase-config.js
 // Import the functions you need from the SDKs you need
 
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytes, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-
-
-require('dotenv').config()
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -24,16 +20,15 @@ const firebaseConfig = {
     messagingSenderId: "1054527040105",
     appId: import.meta.env.VITE_APP_ID
 
-
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-
-
 const imageDB = getStorage(app);
 
-export { imageDB, getStorage, ref, uploadBytes, getDownloadURL, uploadBytesResumable };
+const pdfDB = getStorage(app);
+
+export { imageDB, pdfDB, getStorage, ref, uploadBytes, getDownloadURL, uploadBytesResumable };
 
 

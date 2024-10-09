@@ -19,8 +19,34 @@ module.exports = {
         secondary_3: '#534439',
         secondary_4: '#402e32',
         secondary_5: '#00755f'
-      }
+      },
+
+      animation: {
+        'fade-in-up': 'fadeInUp 0.5s ease-out',
+      },
+      keyframes: {
+        fadeInUp: {
+          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
+      textShadow: {
+        'lg': '2px 2px 4px rgba(0, 0, 0, 0.5)',
+      },
+    },
+  },variants: {
+    extend: {
+      scale: ['group-hover'],
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      const newUtilities = {
+        '.text-shadow-lg': {
+          textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+        },
+      }
+      addUtilities(newUtilities)
+    }
+  ],
 }

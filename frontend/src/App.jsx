@@ -23,6 +23,9 @@ import AdminDashboard from './pages/Admin/AdminDashboard'
 import AdminEdit from './pages/Admin/AdminEdit'
 import AdminEditItem from './pages/Admin/AdminEditItem'
 
+import AdminOrders from './pages/Admin/AdminOrders'
+import AdminOrder from './pages/Admin/AdminOrder'
+
 import ProtectedRoute from './components/ProtectedRoute';
 
 
@@ -36,7 +39,9 @@ function App() {
           <Route path='/collections' element={<Collection/>}/>
           <Route path='/newArrivals' element={<NewArrivals/>}/>
           <Route path='/hotDeals' element={<HotDeals/>}/>
-          <Route path='/product' element={<Product/>}/>
+
+          <Route path='/product/:id' element={<Product />} />
+
           <Route path='/cart' element={<Cart/>}/>
           <Route path='/gallery' element={<Gallery/>}/>
           
@@ -80,6 +85,26 @@ function App() {
           element={
             <ProtectedRoute>
               <AdminEditItem />
+            </ProtectedRoute>
+          } 
+        />
+
+
+        <Route 
+          path="/admin/orders" 
+          element={
+            <ProtectedRoute>
+              <AdminOrders />
+            </ProtectedRoute>
+          } 
+        />
+
+
+        <Route 
+          path="/admin/order/:id" 
+          element={
+            <ProtectedRoute>
+              <AdminOrder />
             </ProtectedRoute>
           } 
         />

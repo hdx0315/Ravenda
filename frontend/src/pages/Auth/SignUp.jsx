@@ -4,12 +4,12 @@ function Signup() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4 font-main">
       <div className="bg-white shadow-md rounded-lg p-8 max-w-md w-full">
-        <h1 className="text-3xl font-semibold text-center mb-6 text-gray-800">Sign Up</h1>
+        <h1 className="text-3xl font-semibold text-center mb-6 text-pink-500">Sign Up</h1>
         
         <form>
           {/* Full Name */}
           <div className="mb-6">
-            <label htmlFor="name" className="block text-lg font-medium text-gray-700">Full Name</label>
+            <label htmlFor="name" className="block text-lg font-medium ">Full Name</label>
             <input 
               type="text"
               id="name"
@@ -21,7 +21,7 @@ function Signup() {
 
           {/* Email */}
           <div className="mb-6">
-            <label htmlFor="email" className="block text-lg font-medium text-gray-700">Email</label>
+            <label htmlFor="email" className="block text-lg font-medium ">Email</label>
             <input 
               type="email"
               id="email"
@@ -33,7 +33,7 @@ function Signup() {
 
           {/* Password */}
           <div className="mb-6">
-            <label htmlFor="password" className="block text-lg font-medium text-gray-700">Password</label>
+            <label htmlFor="password" className="block text-lg font-medium ">Password</label>
             <input 
               type="password"
               id="password"
@@ -45,7 +45,7 @@ function Signup() {
 
           {/* Confirm Password */}
           <div className="mb-6">
-            <label htmlFor="confirm-password" className="block text-lg font-medium text-gray-700">Confirm Password</label>
+            <label htmlFor="confirm-password" className="block text-lg font-medium ">Confirm Password</label>
             <input 
               type="password"
               id="confirm-password"
@@ -59,7 +59,7 @@ function Signup() {
           <div className="mt-6">
             <button 
               type="submit"
-              className="w-full px-6 py-3 text-lg font-semibold text-white bg-secondary_2 hover:bg-secondary_5 rounded-md focus:outline-none focus:ring-4 focus:ring-gray-400 transition-transform transform hover:scale-105"
+              className="w-full px-6 py-3 text-lg font-semibold text-white bg-pink-500 hover:bg-pink-600 rounded-md focus:outline-none focus:ring-4 focus:ring-gray-400 transition-transform transform hover:scale-105"
             >
               Sign Up
             </button>
@@ -69,7 +69,7 @@ function Signup() {
         {/* Sign In Link */}
         <p className="mt-8 text-center text-gray-500">
           Already have an account? 
-          <a href="/auth/login" className="ml-2 text-secondary_5 hover:underline">Sign In</a>
+          <a href="/auth/login" className="ml-2 text-pink-500 hover:underline">Sign In</a>
         </p>
       </div>
     </div>
