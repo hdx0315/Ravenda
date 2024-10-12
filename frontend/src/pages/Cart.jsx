@@ -20,6 +20,8 @@ export default function Cart() {
   const [showForm, setShowForm] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
+  const [upload, setUpload] = useState(false);
+
   const [pdf, setPDF] = useState();
   const [pdfURL, setPdfURL] = useState('')
 
@@ -29,15 +31,33 @@ export default function Cart() {
 
   const generatePDF = async () => {
 
-    if (!cart.length || !customerName || !telephone || !address) {
-      Swal.fire('Error', 'Please ensure the cart is not empty and all details are filled out.', 'error');
-      return;
-    }
+    setUpload(true)
 
+    try {
+      if (!cart.length || !customerName || !telephone || !address) {
+        Swal.fire('Error', 'Please ensure the cart is not empty and all details are filled out.', 'error');
+        return;
+      }
   
+      const pdfBlob = createPDFDocument(); // Create the PDF
+      setPDF(pdfBlob);
+      
+      const pdfURL = await uploadPdfFirebase(pdfBlob); // Upload PDF to Firebase
+      await uploadOrderMongo(pdfURL); // Send order to backend with the PDF URL
+  
+      Swal.fire('Thank You!', 'Your receipt has been downloaded to your device for your future reference...We will contact you within 24 hours...', 'success');
+      clearCart()
+    } catch (error) {
+      Swal.fire('Error', 'An error occurred while placing the order. Please try again.', 'error');
+      console.error('Order placement error:', error);
+    } finally{
+      setUpload(false)
+      setSubmitted(false)
+    }
+  };
+  
+  const createPDFDocument = () => {
     const doc = new jsPDF();
-    
-    // Title and customer info
     doc.setFontSize(20);
     doc.text('RAVENDA', 20, 20);
     doc.text('Order Receipt', 20, 30);
@@ -45,8 +65,7 @@ export default function Cart() {
     doc.text(`Customer Name: ${customerName}`, 20, 50);
     doc.text(`Telephone: ${telephone}`, 20, 60);
     doc.text(`Address: ${address}`, 20, 70);
-  
-    // Adding cart items as a table
+    
     doc.autoTable({
       head: [['Item', 'Color', 'Size', 'Quantity', 'Price']],
       body: cart.map(item => [
@@ -59,24 +78,12 @@ export default function Cart() {
       startY: 80,
     });
   
-    // Total amount
     doc.text(`Total: Rs.${total}.00`, 20, doc.lastAutoTable.finalY + 10);
-  
-    // Convert the document to Blob
-    const pdfBlob = doc.output('blob');
-    setPDF(pdfBlob);
-  
-    // Upload the PDF and wait for the URL
-    const pdfURL = await uploadPdfFirebase(pdfBlob);
-  
-    // Now upload order to Mongo with the correct PDF URL
-    await uploadOrderMongo(pdfURL);
-
     doc.save('Order_reciept'+telephone)
-  
-    Swal.fire('Order Placed!', 'Your receipt has been uploaded and order has been placed.', 'success');
+    return doc.output('blob'); // Return PDF as Blob
 
   };
+  
   
 
   const uploadPdfFirebase = (pdfBlob) => {
@@ -135,16 +142,45 @@ export default function Cart() {
     } else {
       Swal.fire("Failed to place order", "", "error");
     }
+  };const handleCheckout = () => {
+    Swal.fire({
+      title: 'About Processing Order',
+      html: `
+        Please provide your contact details below.
+        <br><br>
+        We highly recommend providing your <strong>WhatsApp number</strong> for quicker communication.
+        <br>
+        Our team will reach out to you within 24 hours.
+        <br><br>
+        If WhatsApp is not available, we will contact you via a phone call to discuss about payment details...
+      `,
+      footer: `
+        <div style="text-align: left;">
+          <input type="checkbox" id="acceptTerms" style="margin-right: 8px;">
+          <label for="acceptTerms">I understand and accept the terms and conditions</label>
+        </div>
+      `,
+      showCancelButton: true,
+      confirmButtonText: 'Continue',
+      preConfirm: () => {
+        const acceptTerms = document.getElementById('acceptTerms').checked;
+        if (!acceptTerms) {
+          Swal.showValidationMessage('Please read and accept above terms and conditions to proceed');
+        }
+        return acceptTerms;
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setShowForm(true); // Show the customer information form
+      }
+    });
   };
-
-
-  const handleCheckout = () => {
-    setShowForm(true); // Show the customer information form
-  };
+  
 
 
   const handleProceed = (e) => {
     e.preventDefault();
+
 
     if (!customerName || !telephone || !address) {
       Swal.fire("Please fill in all fields", "", "error");
@@ -176,14 +212,13 @@ export default function Cart() {
   const handleRemove = (id, color, size) => {
     Swal.fire({
       title: "Do you want to remove this item ?",
-      showDenyButton: true,
       showCancelButton: true,
       confirmButtonText: "Remove",
       denyButtonText: `Keep`,
       icon:"question",
       
-      confirmButtonColor: "#f00",
-      denyButtonColor: "#038f28",
+      confirmButtonColor: "#f9a8d4",
+      cancelButtonColor: '#9c9c9c',
 
     }).then((result) => {
       
@@ -205,8 +240,8 @@ export default function Cart() {
       confirmButtonText: "Clear",
       denyButtonText: `Cancel`,
       icon: "question",
-      confirmButtonColor: "#f00",
-      denyButtonColor: "#038f28",
+      confirmButtonColor: "#f89dfc",
+      denyButtonColor: "#fff",
     }).then((result) => {
 
       if (result.isConfirmed) {
@@ -313,14 +348,14 @@ export default function Cart() {
 
       {/* Checkout Form */}
       {showForm && (
-        <div className="mt-8 p-4 bg-gray-100 rounded-lg">
+        <div className="mt-8 p-4 pb-8 bg-gray-100 rounded-lg">
           <h3 className="text-lg font-semibold">
             Enter Delivery Information
           </h3>
 
-          <form onSubmit={handleProceed} className="space-y-4">
+          <form onSubmit={handleProceed} className="space-y-4 font-bold tracking-wider">
             <div>
-              <label className="block text-sm font-medium">
+              <label className="block">
                 Name
               </label>
 
@@ -334,7 +369,7 @@ export default function Cart() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium">
+              <label className="block">
                 Telephone
               </label>
 
@@ -348,7 +383,7 @@ export default function Cart() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium">
+              <label className="bloc">
                 Address
               </label>
 
@@ -363,7 +398,7 @@ export default function Cart() {
 
             <button
               type="submit"
-              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+              className="bg-pink-400 text-white px-4 py-2 rounded hover:bg-pink-500"
             >
               Submit
             </button>
@@ -380,23 +415,23 @@ export default function Cart() {
             Delivery Information
           </h3>
           
-          <p>
-            <strong>Name:</strong> 
+          <p className='p-2'>
+            <strong>Name      : </strong> 
             {customerName}
           </p>
 
-          <p>
-            <strong>Telephone:</strong> 
+          <p className='p-2'>
+            <strong>Telephone : </strong> 
             {telephone}
           </p>
 
-          <p>
-            <strong>Address:</strong> 
+          <p className='p-2'>
+            <strong>Address   : </strong> 
             {address}
           </p>
 
           <button
-            className="m-2 bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
+            className="m-2 bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-600"
             onClick={handleEditDetails}
           >
             EDIT DETAILS
@@ -406,12 +441,22 @@ export default function Cart() {
             THIS DETAILS ARE CORRECT AND PROCEED TO PLACE ORDER
           </p>
           
-          <button
-            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 m-2"
-            onClick={generatePDF}
-          >
-            PLACE ORDER
-          </button>
+          
+          {upload ? (
+            <button
+              className="bg-pink-400 text-white px-4 py-2 rounded hover:bg-pink-600 m-2"
+              disabled={true}
+            >
+              ORDER UPLOADING....
+            </button>
+          ) : (
+            <button
+              className="bg-pink-400 text-white px-4 py-2 rounded hover:bg-pink-600 m-2"
+              onClick={generatePDF}
+            >
+              PLACE ORDER
+            </button>
+          )}      
         </div>
       )}
     </div>
