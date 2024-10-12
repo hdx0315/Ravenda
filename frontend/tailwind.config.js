@@ -5,7 +5,8 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",],
   theme: {
     fontFamily:{
-      'main': 'Moutyara, Arial, sans-serif'
+      'main': 'Moutyara, Arial, sans-serif',
+      'sec': 'Goaldleaf, Arial, sans-serif'
     },
     extend: {
       colors:{

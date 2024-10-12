@@ -24,7 +24,7 @@ function NavBar() {
             }
           </button>
 
-          <a href="/" className="text-3xl font-bold text-pink-500">
+          <a href="/" className="text-3xl font-bold text-pink-500 font-sec">
             Ravenda
           </a>
 
@@ -103,7 +103,7 @@ function NavBar() {
             <FiSearch size={24} />
           </button>
 
-          <a href="/" className="text-4xl font-bold text-pink-500">
+          <a href="/" className="text-4xl font-bold text-pink-500 font-sec">
           Ravenda
           </a>
 
@@ -122,7 +122,7 @@ function NavBar() {
 
           </div>
         </div>
-        
+
         <nav className="border-t border-b border-gray-200">
           <ul className="flex justify-center space-x-8 py-4 font-bold">
             

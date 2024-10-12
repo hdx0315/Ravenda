@@ -11,4 +11,11 @@
       font-display: swap;
       src: url(./assets/fonts/Moutyara/Moutyara.ttf) format('truetype');
     }
+    @font-face {
+      font-family: 'Goaldleaf';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url(./assets/fonts/Goaldleaf/goaldleaf.ttf) format('truetype');
+    }
   }
