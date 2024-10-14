@@ -41,6 +41,8 @@ module.exports = {
     },
   },
   plugins: [
+    
+    require('tailwindcss-animated'),
     function ({ addUtilities }) {
       const newUtilities = {
         '.text-shadow-lg': {
