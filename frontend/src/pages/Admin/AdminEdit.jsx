@@ -112,7 +112,7 @@ const AdminEdit = () => {
                                     />
                                 </td>
                                 <td className="border p-2">{product.title}</td>
-                                <td className="border p-2">${product.price}</td>
+                                <td className="border p-2">{product.price}</td>
                                 <td className="border p-2">{product.category}</td>
                                 <td className="border p-2">
                                     {product.newArrival ? 'Yes' : 'No'}
