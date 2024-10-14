@@ -69,7 +69,7 @@
                 img={product.image}
                 title={product.title}
                 description={product.category}
-                price={`$${product.price}`}  // Corrected price display
+                price={`Rs. ${product.price}.00`}  // Corrected price display
               />
             </Link>
           ))}
