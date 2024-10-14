@@ -106,7 +106,7 @@ function Collection() {
                       img={product.image}
                       title={product.title}
                       description={product.category}
-                      price={`$${product.price}`}
+                      price={`Rs. ${product.price}.00`}
                     />
                   </Link>
                 
