@@ -98,7 +98,7 @@ return (
     </div>
           
     <div className="flex justify-center w-full mt-8">
-          <a href="/newArrivals" className="group">
+          <a href="/hotDeals" className="group">
             <button className="px-8 py-4 text-white font-bold bg-pink-300 hover:bg-pink-400 hover:text-black tracking-widest rounded-lg text-lg transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-lg">
               See All Hot Deals
             </button>
